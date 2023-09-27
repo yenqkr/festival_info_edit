@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="info.css">
+        <link
+            rel="stylesheet"
+            as="style"
+            crossorigin="crossorigin"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/>
+        <title>info</title>
+    </head>
+    <body>
+        <!-- 상단바 -->
+        <header class="header">
+            <a><img class="back" src="img/backicon.svg" alt="뒤로가기" class="list_icon"></a>
+            <img class="prism" src="img/prismPink.svg" alt="로고" class="list_icon2" id="logo">
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class='menu-icon' for="menu-btn">
+            <div class='menu-button' onclick="toggle()">
+            <img src="img/hamburger.svg" alt="로고" class="Group 1_pink">
+            </div>
+        </label>
+            <ul class="menu">
+                <li><a href="#">타임테이블</a></li>
+                <li><a href="#">축제 지도 확인하기</a></li>
+                <li><a href="#">플리마켓 / 제휴부스 / 총학부스</a></li>
+                <li><a href="#">굿즈 구매 예약</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">방명록</a></li>
+                <li><a href="#">만든이들</a></li>
+                <a href="#"><div class="box">관리자 모드</div></a>
+            </ul>
+        </header>
+        <div class="container" id="blur">
+            <!-- 공지사항,글쓰기 -->
+            <div class="fst">
+                <img src="img/staricon.svg" alt="다이아몬드" class="notice_icon">
+                <h1>공지사항</h1>
+                <a href="info-write.html">
+                    <h2>글쓰기</h2>
+                </a>
+            </div>
+
+            <!-- 공지사항들 -->
+            <div class="category_container">
+                <div class="row">
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 일정 안내</h2>
+                        </a>
+                    </div>
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 플리마켓 소개</h2>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 포스터 공개</h2>
+                        </a>
+                    </div>
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 배리어프리존</h2>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 제휴사 소개</h2>
+                        </a>
+                    </div>
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>2023 수정대동제 PRISM</h2>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 더보기 이후 -->
+                <div class="rowplus">
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 더보기</h2>
+                        </a>
+                    </div>
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 더보기</h2>
+                        </a>
+                    </div>
+                </div>
+
+                 <!-- 더보기버튼 -->
+            <div class="plusbutton" id="moreButton">
+                <h3>+더보기</h3>
+            </div>
+
+                <div class="rowplus">
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 더보기</h2>
+                        </a>
+                    </div>
+                    <div class="category">
+                        <a href="">
+                            <img src="img/box.png">
+                            <h2>수정대동제 더보기</h2>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer"></div>
+        </div>
+    </div>
+</div>
+
+        <script>
+            function toggle(){
+                var blur=document.getElementById('blur');
+                blur.classList.toggle('active')
+                }
+
+            const moreButton = document.getElementById('moreButton');
+            const rowPlusElements = document.querySelectorAll('.rowplus');
+            let isVisible = false; // 추가: 더보기 요소의 가시성 상태 변수
+        
+            moreButton.addEventListener('click', function() {
+                rowPlusElements.forEach(element => {
+                    element.style.display = 'flex';
+                    element.style.visibility = 'visible';
+                });
+        
+                moreButton.style.display = 'none'; // "더보기" 버튼 숨기기
+                isVisible = true; // 더보기 요소가 보이도록 상태 업데이트
+            });
+        
+            // 페이지가 로드될 때 한 번만 실행
+            window.addEventListener('load', function() {
+                if (isVisible) {
+                    rowPlusElements.forEach(element => {
+                        element.style.display = 'flex';
+                        element.style.visibility = 'visible';
+                    });
+                    moreButton.style.display = 'none'; // "더보기" 버튼 숨기기
+                }
+            });
+        </script>
+        
+
+    </body>
+</html>

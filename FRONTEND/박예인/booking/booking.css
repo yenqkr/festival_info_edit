@@ -1,0 +1,268 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  list-style: none;
+}
+html {
+  margin: 0;
+  /* height: 100%; */
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fcf9fb;
+  /* margin-left: 20px;
+  margin-right: 20px; */
+  font-family: "Pretendard-Regular";
+}
+input {
+  font-family: "Pretendard-Regular";
+}
+select {
+  color: #f194b4;
+  border-radius: 4px;
+  border: solid 1px #f194b4;
+  width: 80px;
+  height: 25px;
+  font-family: "Pretendard-Regular";
+  font-size: 11px;
+  padding-left: 18px;
+  appearance: none;
+  background: #fff url("../img/dropdown2.svg") no-repeat center right; /*화살표 이미지 넣기*/
+  background-size: 26px 26px;
+}
+select:focus {
+  outline: none;
+}
+option:focus {
+  outline: none;
+}
+.top_bar {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.back_btn {
+  float: left;
+  width: 12px;
+  height: 16px;
+}
+.logo_img {
+  display: block;
+  margin: 0 auto;
+  height: 21px;
+  width: 89px;
+}
+.ham_btn {
+  float: right;
+  width: 17px;
+  height: 15px;
+}
+.booking {
+  height: 70px;
+}
+.top {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+}
+.sparkle {
+  width: 12px;
+  height: 20px;
+}
+.booking_text {
+  color: #f06786;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 10px;
+}
+.choose {
+  display: flex;
+}
+.choose_ex {
+  font-size: 13px;
+  color: #313131;
+}
+.detail_btn {
+  /* float: right; */
+
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  margin-top: -5px;
+}
+.goods_choose {
+  background-color: white;
+  border-radius: 7px;
+  display: flex;
+  margin-bottom: 10px;
+
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.1);
+
+  position: relative; /* 추가된 부분: chosen 요소의 position 속성을 relative로 변경 */
+}
+
+.goods_choose .check {
+  display: none;
+}
+.goods_img {
+  height: auto;
+  width: 150px;
+}
+.text {
+  width: 100%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.name {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: space-between; /* 수정된 부분: 오른쪽으로 정렬 */
+
+  width: 100%;
+}
+.goods_name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #313131;
+}
+.goods_price {
+  float: left;
+  font-size: 11px;
+  margin-top: 2%;
+  color: #313131;
+}
+.num_select {
+  margin-top: 60px;
+}
+.detail {
+  float: right;
+  font-size: 11px;
+  color: #313131;
+}
+.btn {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.booking_btn {
+  background-color: #ffced9;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  width: 100%;
+  height: 47px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.check {
+  width: 36px;
+  height: 36px;
+  position: absolute; /* 추가된 부분: check 이미지의 position 속성을 absolute로 변경 */
+  top: -18px; /* 추가된 부분: 상단으로 18px만큼 이동 */
+  right: 8px; /* 추가된 부분: 오른쪽으로 18px만큼 이동 */
+
+  z-index: 1; /* 추가된 부분: z-index 값을 조절하여 겹치는 순서 조정 */
+}
+
+/* nav바 */
+
+a {
+  color: #f06786;
+}
+
+#logo {
+  height: 21px;
+  width: 89px;
+}
+
+.header ul {
+  margin-top: 74px;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fcf9fb;
+}
+.menu > li {
+  padding: 17px 36px;
+}
+.header ul a {
+  text-decoration: none;
+  font-size: 15px;
+}
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+.header .menu-icon {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  background-color: #fcf9fb;
+  position: fixed;
+  height: 75px;
+  padding: 16px;
+  z-index: 3;
+  align-items: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 500px;
+}
+
+.box {
+  text-align: center;
+  font-size: 12px;
+  margin: 23px 0px 50px 35px;
+  width: 80px;
+  height: 24px;
+  background-color: #ffffff00;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 1px solid #f06786ed;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 75px;
+}
+.container#blur.active {
+  background-color: rgba(0, 0, 0, 0.25);
+  filter: blur(5px) brightness(0.75);
+}

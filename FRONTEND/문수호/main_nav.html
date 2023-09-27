@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="main_nav.css">
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+    <header class="header">
+        <img class="prism" src="images/prismWhite.svg" alt="로고" class="list_icon2" id="logo">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class='menu-icon' for="menu-btn" onclick="toggle()">
+            <div class='menu-button'><img src="images/Group 1_white.png" alt="로고"></div>
+        </label>
+            <ul class="menu">
+                <li><a href="#">타임테이블</a></li>
+                <li><a href="#">축제 지도 확인하기</a></li>
+                <li><a href="#">플리마켓 / 제휴부스 / 총학부스</a></li>
+                <li><a href="#">굿즈 구매 예약</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">방명록</a></li>
+                <li><a href="#">만든이들</a></li>
+                <a href="#"><div class="box">관리자 모드</div></a>
+            </ul>
+        </header>
+        <div class="container" id="blur">
+            <br><br><br><br>
+            <h2>모자이크 되는지 실험 중</h2>
+        </div>
+
+    <script type="text/javascript">
+
+        function toggle(){
+            var blur=document.getElementById('blur');
+            blur.classList.toggle('active')
+        }
+    </script>
+</body>
+</html>

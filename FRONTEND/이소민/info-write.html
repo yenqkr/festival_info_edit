@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="info-write.css">
+        <link
+            rel="stylesheet"
+            as="style"
+            crossorigin="crossorigin"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/>
+        <title>info-write</title>
+    </head>
+    <body>
+        <!-- 상단바 -->
+        <header class="header">
+            <a><img class="back" src="img/backicon.svg" alt="뒤로가기" class="list_icon"></a>
+            <img class="prism" src="img/prismPink.svg" alt="로고" class="list_icon2" id="logo">
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class='menu-icon' for="menu-btn">
+            <div class='menu-button' onclick="toggle()">
+                <img src="img/hamburger.svg" alt="로고" class="Group 1_pink">
+            </div>
+            </label>
+            <ul class="menu">
+                <li><a href="#">타임테이블</a></li>
+                <li><a href="#">축제 지도 확인하기</a></li>
+                <li><a href="#">플리마켓 / 제휴부스 / 총학부스</a></li>
+                <li><a href="#">굿즈 구매 예약</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">방명록</a></li>
+                <li><a href="#">만든이들</a></li>
+                <a href="#"><div class="box">관리자 모드</div></a>
+            </ul>
+        </header>
+        <div class="container_main" id="blur">
+            <div class="container">
+            <!-- 제목 -->
+            <div class="title">
+                <h2>제목</h2>
+            </div>
+            <div class="title-box">
+                <input placeholder="제목을 입력해주세요."/>
+            </div>
+
+            <!-- 게시글 작성 -->
+            <div class="writing">
+                <h2>게시글 작성</h2>
+            </div>
+            <div class="writing-box">
+                <textarea placeholder="텍스트를 작성해주세요." rows="20"></textarea>
+            </div>
+
+            <!-- 첨부 파일 -->
+            <div class="plusfile">
+                <h2>첨부 파일</h2>
+            </div>
+            <div class="addimg">
+                <h2 onclick="toggleImgFile()">사진 추가</h2>
+            </div>
+
+            <!-- 게시글 업로드 -->
+            <div class="upload">
+                <a href="">
+                    <h2>게시글 업로드</h2>
+                </a>
+            </div>
+
+            <!-- 파일이름.png -->
+            <div class="imgfile">
+                <a href=""><img src="img/fileimg.svg" alt="파일" class="file">
+                <h2>파일이름.png</h2>
+            </a>
+            </div>
+        </div>
+    </div>
+
+        <script>
+            function toggle(){
+                var blur=document.getElementById('blur');
+                blur.classList.toggle('active')
+                }
+
+            var imgFile = document.querySelector('.imgfile');
+            var uploadButton = document.querySelector('.upload');
+            var addImgButton = document.querySelector('.addimg');
+            var imgFileVisible = false;
+
+            function toggleImgFile() {
+                imgFileVisible = !imgFileVisible;
+                imgFile.style.display = imgFileVisible
+                    ? 'block'
+                    : 'none';
+
+                if (imgFileVisible) {
+                    uploadButton.style.top = '690px';
+                } else {
+                    uploadButton.style.top = '635px';
+                }
+            }
+        </script>
+    </body>
+</html>

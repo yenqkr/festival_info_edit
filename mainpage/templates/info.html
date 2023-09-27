@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/info.css">
+    <link rel="stylesheet" as="style" crossorigin="crossorigin"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <title>info</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 상단바 -->
+    <header class="header">
+        <a href='{% url "mainpage:mainpage" %}'>
+            <img class="back" src="/static/img/backicon.svg" alt="뒤로가기" class="list_icon"></a>
+        <img class="prism" src="/static/img/prismPink.svg" alt="로고" class="list_icon2" id="logo">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class='menu-icon' for="menu-btn">
+            <div class='menu-button' onclick="toggle()">
+                <img src="/static/img/hamburger.svg" alt="로고" class="Group 1_pink">
+            </div>
+        </label>
+        <ul class="menu">
+            <li><a href="http://sswu-prism.com/timetable/">타임테이블</a></li>
+            <li><a href="http://sswu-prism.com/map/">축제 지도 확인하기</a></li>
+            <li><a href="http://sswu-prism.com/booth/">플리마켓 / 제휴부스 / 총학부스</a></li>
+            <li><a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a></li>
+            <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+            <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+            <li><a href="">만든이들</a></li>
+            <a href="{% url 'mainpage:administrator' %}">
+                <div class="box">관리자 모드</div>
+            </a>
+        </ul>
+    </header>
+    <div class="container" id="blur">
+        <!-- 공지사항,글쓰기 -->
+        <div class="fst">
+            <img src="/static/img/staricon.svg" alt="다이아몬드" class="notice_icon">
+            <h1>공지사항</h1>
+            <!-- 로그인 했을 때만 글쓰기 버튼이 보임 -->
+            {% if user.is_authenticated %}
+            <a href="{% url 'mainpage:info_write' %}">
+                <h2>글쓰기</h2>
+            </a>
+            {% endif %}
+        </div>
+
+        <!-- 공지사항들 -->
+        <div class="category_container">
+            <div class="grid" id="postList">
+                {% for q in infos %}
+                <div class="category {% if forloop.counter > 6 %}hidden{% endif %} ">
+                    <a href="{% url 'mainpage:info_post' q.id %}">
+                        <!-- 이미지가 있을 경우 출력, 없으면 '이미지 없음' 출력 -->
+                        {% if q.images.first %}
+                        <img src="{{ q.images.first.image.url }}" alt="info_image">
+                        {% else %}
+                        <p>이미지 없음</p>
+                        {% endif %}
+                        <h2>{{ q.title }}</h2>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="plus">
+                <button class="plusbutton" id="loadMore">+더보기</button>
+            </div>
+            <div class="footer"></div>
+        </div>
+    </div>
+
+
+    <script>
+
+        document.getElementById("loadMore").addEventListener("click", function () {
+            const hiddenPosts = document.querySelectorAll("#postList .hidden");
+            let shownCount = 0;
+            for (let i = 0; i < 6 && i < hiddenPosts.length; i++) {
+                hiddenPosts[i].classList.remove("hidden");
+                shownCount++;
+            }
+            // 숨겨진 게시물이 더 이상 없다면 "더보기" 버튼 숨기기
+            if (shownCount < 6 || hiddenPosts.length - shownCount <= 0) {
+                document.getElementById("loadMore").style.display = "none";
+            }
+        });
+
+        function toggle() {
+            var blur = document.getElementById('blur');
+            blur.classList.toggle('active')
+        }
+
+        const moreButton = document.getElementById('moreButton');
+        const rowPlusElements = document.querySelectorAll('.rowplus');
+        let isVisible = false; // 추가: 더보기 요소의 가시성 상태 변수
+    </script>
+
+</body>
+
+</html>

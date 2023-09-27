@@ -1,0 +1,351 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>makers</title>
+    <link rel="stylesheet" href="{% static 'css/makers.css' %}" />
+  </head>
+  <body>
+    <div class="con">
+    <header class="header">
+      <a
+        ><img
+          class="back"
+          src="{% static 'img/backicon.svg' %}"
+          alt="뒤로가기"
+          class="list_icon"
+          onclick="goBack()"
+      /></a>
+      <img
+        class="prism"
+        src="{% static 'img/prismPink.svg' %}"
+        alt="로고"
+        class="list_icon2"
+        id="logo"
+        onclick="Home()"
+      />
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn">
+        <div class="menu-button" onclick="toggle()">
+          <img src="{% static 'img/hamburger.svg' %}" alt="로고" class="Group 1_pink" />
+        </div>
+      </label>
+      <ul class="menu">
+        <li><a href="http://sswu-prism.com/main/timetable/">타임테이블</a></li>
+        <li><a href="http://sswu-prism.com/main/map/">축제 지도 확인하기</a></li>
+        <li><a href="http://sswu-prism.com/booth/">플리마켓 / 제휴부스 / 총학부스</a></li>
+        <li><a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a></li>
+        <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+        <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+        <li><a href="{% url 'mainpage:makers' %}">만든이들</a></li>
+        <a href="{% url 'mainpage:administrator' %}">
+            <div class="box">관리자 모드</div>
+        </a>
+      </ul>
+    </header>
+    <div class="container" id="blur">
+      <!-- 만든사람들 선 -->
+      <div class="line">
+        <div class="texts">
+          <div class="makers">만든 사람들</div>
+          <div class="likelion11">멋쟁이사자처럼 11기</div>
+        </div>
+      </div>
+      <!-- pm -->
+      <div class="profile">
+        <span class="position">PM & DESIGN</span>
+        <div class="profile_info">
+          <img src="{% static 'img/jiyeon.png' %}" class="profile_img" />
+          <span class="name">송지연</span>
+          <span class="major">서비스디자인공학과 22</span>
+          <span class="mission">서비스 총 기획 및 디자인</span>
+        </div>
+      </div>
+      <!-- front-end -->
+      <div class="profile">
+        <span class="position">Front-End</span>
+        <!-- 첫번째 줄 -->
+        <!-- FE1 -->
+        <div class="profile_info">
+          <img src="{% static 'img/sojeong.png' %}" class="profile_img" />
+          <span class="name">김소정</span>
+          <span class="major">AI융합학부 21</span>
+          <span class="mission">프론트엔드 총괄</span>
+        </div>
+        <div class="row">
+          <!-- FE2 -->
+          <div class="profile_info">
+            <img src="{% static 'img/suho.png' %}" class="profile_img" />
+            <span class="name">문수호</span>
+            <span class="major">AI융합학부 22</span>
+            <span class="mission">메인페이지 / 메뉴 / 관리자 페이지</span>
+          </div>
+          <!-- FE3 -->
+          <div class="profile_info">
+            <img src="{% static 'img/yein.png' %}" class="profile_img" />
+            <span class="name">박예인</span>
+            <span class="major">AI융합학부 21</span>
+            <span class="mission">굿즈 예약, 만든 사람들 페이지</span>
+          </div>
+        </div>
+        <!-- 두번째 줄 -->
+        <div class="row">
+          <!-- FE4 -->
+          <div class="profile_info">
+            <img src="{% static 'img/somin.png' %}" class="profile_img" />
+            <span class="name">이소민</span>
+            <span class="major">AI융합학부 21</span>
+            <span class="mission">공지사항 페이지</span>
+          </div>
+          <!-- FE5 -->
+          <div class="profile_info">
+            <img src="{% static 'img/chaehyun.png'%}" class="profile_img" />
+            <span class="name">이채현</span>
+            <span class="major">컴퓨터공학과 21</span>
+            <span class="mission"
+              >부스 정보, 지도, 타임테이블, 방명록 확인 및 작성</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Back-End -->
+      <div class="profile">
+        <span class="position">Back-End</span>
+        <!-- 첫번째 줄 -->
+        <div class="row">
+          <!-- BE1 -->
+          <div class="profile_info">
+            <img src="{% static 'img/rye.png' %}" class="profile_img" />
+            <span class="name">이예령</span>
+            <span class="major">컴퓨터공학과 22</span>
+            <span class="mission">백엔드 총괄</span>
+          </div>
+          <!-- BE2 -->
+          <div class="profile_info">
+            <img src="{% static 'img/hyunsoo.png' %}" class="profile_img" />
+            <span class="name">김현수</span>
+            <span class="major">컴퓨터공학과 22</span>
+            <span class="mission">굿즈 예약구매 백엔드</span>
+          </div>
+        </div>
+        <!-- 두번째 줄 -->
+        <div class="row">
+          <!-- BE1 -->
+          <div class="profile_info">
+            <img src="{% static 'img/sujin.png' %}" class="profile_img" />
+            <span class="name">전수진</span>
+            <span class="major">AI융합학부 21</span>
+            <span class="mission">방명록, 부스 정보, 지도 페이지 백엔드</span>
+          </div>
+
+          <!-- BE2 -->
+          <div class="profile_info">
+            <img src="{% static 'img/gain.png' %}" class="profile_img" />
+            <span class="name">이가인</span>
+            <span class="major">컴퓨터공학과 19</span>
+            <span class="mission">메인페이지, 인포 페이지 백엔드</span>
+          </div>
+        </div>
+      </div>
+      <hr class="yellow" />
+      <div class="profile">
+        <div class="position">[2023 수정대동제] 축제 기획단</div>
+
+        <div class="fes">
+          <div class="fes_pos">총학생회장</div>
+          <div class="fes_name">송예은</div>
+          <div class="fes_major">법학부 21</div>
+        </div>
+
+        <div class="fes">
+          <div class="fes_pos">부총학생회장</div>
+          <div class="fes_name">전영주</div>
+          <div class="fes_major">수리통계데이터사이언스학부 21</div>
+        </div>
+
+        <div class="fes">
+          <div class="fes_pos">축제기획단장</div>
+          <div class="fes_name">이서진</div>
+          <div class="fes_major">산업디자인과 21</div>
+        </div>
+
+        <div class="fes">
+          <div class="fes_pos">축제기획단원</div>
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">권윤희</div>
+              <div class="fes_major">소비자생활문화산업학과 23</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">김리나</div>
+              <div class="fes_major">미디어커뮤니케이션학과 20</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">김민경</div>
+              <div class="fes_major">사학과 20</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">김민정</div>
+              <div class="fes_major">청정융합에너지공학과 22</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">김민정</div>
+              <div class="fes_major">청정융합에너지공학과 22</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">김은성</div>
+              <div class="fes_major">심리학과 21</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">김지니</div>
+              <div class="fes_major">법학부 22</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">김지현</div>
+              <div class="fes_major">뷰티산업학과 23</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">김채현</div>
+              <div class="fes_major">수리통계데이터사이언스학부 20</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">김혜리</div>
+              <div class="fes_major">일본어문문화학과 23</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">박다영</div>
+              <div class="fes_major">산업디자인과 21</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">박성원</div>
+              <div class="fes_major">경영학과 23</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">박수아</div>
+              <div class="fes_major">경영학과 23</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">박수운</div>
+              <div class="fes_major">법학과 19</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">박유채</div>
+              <div class="fes_major">문화예술경영학과 23</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">배윤지</div>
+              <div class="fes_major">법학부 21</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">부현진</div>
+              <div class="fes_major">지리학과 20</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">선의연</div>
+              <div class="fes_major">법학부 22</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">신재원</div>
+              <div class="fes_major">정치외교학과 22</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">원도윤</div>
+              <div class="fes_major">바이오헬스융합학부 23</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">유진희</div>
+              <div class="fes_major">미디어커뮤니케이션학과 23</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">윤수민</div>
+              <div class="fes_major">산업디자인과 23</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">이도연</div>
+              <div class="fes_major">바이오식품공학과 23</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">이정원</div>
+              <div class="fes_major">수리통계데이터사이언스학부 20</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">이지민</div>
+              <div class="fes_major">법학부 21</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">임지혜</div>
+              <div class="fes_major">경제학과 20</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">장은지</div>
+              <div class="fes_major">미디어커뮤니케이션학과 22</div>
+            </div>
+          </div>
+
+          <div class="members">
+            <div class="mem2">
+              <div class="fes_name">정혜경</div>
+              <div class="fes_major">바이오헬스융합학부 22</div>
+            </div>
+            <div class="mem3">
+              <div class="fes_name">채예원</div>
+              <div class="fes_major">경영학부 21</div>
+            </div>
+            <div class="mem2">
+              <div class="fes_name">황하랑</div>
+              <div class="fes_major">서비스디자인공학과 23</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <footer>
+        <div class="foot">
+          <img src="{% static 'img/foot.svg' %}" />
+          <p class="copy">
+            Copyright 2023. LIKELION at SUNGSHIN All rights reserved.
+          </p>
+        </div>
+      </footer>
+    <script type="text/javascript">
+      function toggle() {
+        var blur = document.getElementById("blur");
+        blur.classList.toggle("active");
+      }
+
+      function Home() {
+        window.location.href = "{% url 'mainpage:mainpage' %}";
+      }
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>

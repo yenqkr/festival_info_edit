@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load custom_split %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>boothinfo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <!-- <link rel="stylesheet" href="visitor-write.css" /> -->
+    <link rel="stylesheet" href="{% static 'css/boothinfo.css' %}" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+</head>
+<body>
+    <header class="header">
+        <a><img class="back" src="{% static 'img/backicon.svg' %}" alt="뒤로가기" class="list_icon" onclick="goBack()"></a>
+        <img class="prism" src="{% static 'img/prismPink.svg' %}" alt="로고" class="list_icon2" id="logo" onclick="Home()">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class='menu-icon' for="menu-btn">
+            <div class='menu-button' onclick="toggle()">
+                <img src="{% static 'img/hamburger.svg' %}" alt="로고" class="Group 1_pink">
+            </div>
+        </label>
+        <ul class="menu">
+            <li><a href="http://sswu-prism.com/main/timetable/">타임테이블</a></li>
+            <li><a href="http://sswu-prism.com/main/map/">축제 지도 확인하기</a></li>
+            <li><a href="http://sswu-prism.com/booth/">플리마켓 / 제휴부스 / 총학부스</a></li>
+            <li><a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a></li>
+            <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+            <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+            <li><a href="{% url 'mainpage:makers' %}">만든이들</a></li>
+            <a href="{% url 'mainpage:administrator' %}"><div class="box">관리자 모드</div></a>
+        </ul>
+    </header>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="container_main" id="blur">
+    <div id="wrap">
+        <div id="title">
+            <div class="title_photo">
+                <img src="{% static 'img/staricon.svg' %}"></img>
+            </div>
+            <div class="title_tx">부스 A to Z</div>
+            <a id="filter_btn">
+                <img src="{% static 'img/filter.svg' %}"></img>
+            </a>
+        </div>
+        <div class="container">
+            <div class="title_ex">수정대동제에서 진행되는 각종 부스의 정보들을 살펴보세요!</div>
+            <!-- <form method="POST" onsubmit=""> -->
+            <div class="searchbox">
+                <input type="text" name="search" method="POST" id="keyword" placeholder="키워드로 부스 찾기">
+                <button class="search_btn" type="submit">
+                    <img src="{% static 'img/searchicon.svg' %}">
+                </button>
+            </div>
+    </form>
+            <!-- </form> -->
+            <!-- 나중에 booth 반복문에 넣어서 여러개 만들기 -->
+            {% for booth in booth_list %}
+            <div class="booth">
+                <div class="booth_img_wrap">
+                    <img src="{{booth.image.url }}" alt="부스 대표 이미지">
+                </div>
+                <div class="booth_info_wrap">
+                    <div class="booth_info1 corner">
+                        <div class="booth_name">{{booth.name|truncatechars:11}}</div>
+                        <div class="booth_site">{{booth.locate}}</div>
+                    </div>
+                    <div class="booth_info2">
+                        <!-- 글자수 제한 둬야 할 듯. 내용 많으면 튀어나옴 -->
+                        <div>{{booth.content|truncatechars:50}}</div>
+                    </div>
+                    <div class="booth_info3 corner">
+                        {% with booth_date_list=booth.date|split:" " %}
+                        {% with booth_time_list=booth.time|split:" " %}
+                            {% if booth_date_list|length > 1 %} 
+                                <div class="place_btn">위치보기</div>
+                                <div class="time">{{ booth_date_list.0 }}&nbsp;{{ booth_time_list.0 }}<br>
+                                    {{ booth_date_list.1 }}&nbsp;{{ booth_time_list.1 }}</div>
+                            {% else %}
+                                <div class="place_btn">위치보기</div>
+                                <div class="time">{{ booth_date_list.0 }}&nbsp;{{ booth_time_list.0 }}</div>
+                            {% endif %}
+                        {% endwith %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="under"></div>
+        </div>
+    </div>
+
+    <div id="filter_wrap" class="popup_wrap" style="display:none;">
+    <!-- <div id="filter_wrap" class="popup_wrap"> -->
+        <div id="filter" class="popup">
+            <div class="popup_title">
+                <span class="popup_title">Filter</span>
+                <button type="button" id="close">
+                    <img src="{% static 'img/X.png' %}" alt="필터 닫기">
+                </button>
+            </div>
+
+            <form method="POST" action="">{% csrf_token %}
+                <label class="label_title">날짜</label>
+                <div>
+                    <input type="checkbox" class="checkbox" id="day4" name="date"  value="10월4일"/>
+                    <label for="day4" class="filter_text">10월 4일</label>
+                    <input type="checkbox" class="checkbox" id="day5" name="date" value="10월5일"/>
+                    <label for="day5">10월 5일</label>
+                </div>
+
+                <label class="label_title">시간대</label>
+                <div>
+                    <input type="checkbox" class="checkbox" id="all" name="time" value="종일"/>
+                    <label for="all" class="filter_text">종일 부스</label>
+                    <input type="checkbox" class="checkbox" id="am" name="time" value="오전" />
+                    <label for="am">오전 부스</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="checkbox" id="pm" name="time" value="오후" />
+                    <label for="pm">오후 부스</label>
+                </div>
+
+                <label class="label_title">부스 종류</label>
+                <div>
+                    <input type="checkbox" class="checkbox" id="student" name="kind" value="학생 부스" />
+                    <label for="student" class="filter_text">학생 부스</label>
+                    <input type="checkbox" class="checkbox" id="partner" name="kind" value="제휴 부스" />
+                    <label for="partner">제휴 부스</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="checkbox" id="council" name="kind" value="총학 부스" />
+                    <label for="council" class="filter_text">총학 부스</label>
+                    <input type="checkbox" class="checkbox" id="administration" name="kind" value="행정부서 부스" />
+                    <label for="administration">행정부서 부스</label>
+                </div>
+                <button type="button" class="filter_end" id="filter_close">닫기</button>
+                <input type="submit" class="filter_end" id="filter_submit"  value="확인">
+            </form>
+        </div>
+    </div>
+
+    <div id="place_wrap" class="popup_wrap" style="display:none;">
+    <!-- <div id="place_wrap" class="popup_wrap"> -->
+        <div id="place" class="popup">
+            <span class="popup_title" id="place_title"></span>
+            <span id="place_title_ex">잘못된 장소입니다.</span>
+            <button type="button" id="place_close">
+                <img src="{% static 'img/X.png' %}" alt="필터 닫기">
+            </button>
+            
+
+            <div class="place_container" style="display:none">
+                <div class="place_grid" id="place_grid4">
+                    <div class="place_box"></div><div class="place_box"></div><div class="place_box"></div><div class="place_box"></div>
+                </div>
+            </div>
+            <div class="place_container" style="display:none">
+                <div class="place_grid" id="place_grid10">
+                    <div class="place_box"></div><div class="place_box"></div><div class="place_box"></div><div class="place_box"></div><div class="place_box"></div>
+                    <div class="place_box"></div><div class="place_box"></div><div class="place_box"></div><div class="place_box"></div><div class="place_box"></div>
+                </div>
+            </div>
+            <div class="place_container" style="display:none">
+                <div class="place_grid" id="place_grid6">
+                    <div class="place_box"></div><div class="place_box"></div><div class="place_box"></div>
+                    <div class="place_box"></div><div class="place_box"></div><div class="place_box"></div>
+                </div>
+            </div>
+            <div class="place_container" style="display:none">
+                <div class="place_grid" id="place_grid9">
+                    <div class="place_box"></div><div class="place_box"></div><div class="place_box"></div>
+                    <div class="place_box"></div><div class="place_box"></div><div class="place_box"></div>
+                    <div class="place_box"></div><div class="place_box"></div><div class="place_box"></div>
+                </div>
+            </div>
+
+            <img src="{% static 'img/place_A.svg' %}" class="place_map" style="display:none" alt="성신관 처마, 성신관과 제일 먼 쪽">
+            <img src="{% static 'img/place_B1.svg' %}"class="place_map"  style="display: none" alt="성신관 중앙에 있는 문 근처">
+            <img src="{% static 'img/place_B2.svg' %}"class="place_map"  style="display: none" alt="성신관 처마, 성신관과 가까운 부분">
+            <img src="{% static 'img/place_C.svg' %}" class="place_map" style="display: none">
+            <img src="{% static 'img/place_D.svg' %}"class="place_map"  style="display: none">
+            <img src="{% static 'img/place_E.svg' %}"class="place_map"  style="display: none">
+            <img src="{% static 'img/place_F.svg' %}"class="place_map"  style="display: none">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    //블러처리
+    function toggle(){
+        var blur=document.getElementById('blur');
+        blur.classList.toggle('active')
+    }
+    function Home() {
+        window.location.href = "{% url 'mainpage:mainpage' %}";
+    }
+    function goBack() {
+        window.history.back();
+    }
+
+    // 필터
+    const filter_btn = document.getElementById('filter_btn');
+    const filter = document.getElementById('filter_wrap');
+    const close_btn = document.getElementById('close')
+    const filter_close = document.getElementById('filter_close');
+
+    //필터 열기
+    filter_btn.addEventListener('click', function() {
+        filter.style.display = 'block';
+    });
+    
+    //필터 닫기
+    close_btn.addEventListener('click', function() {
+        filter.style.display = 'none';
+    });
+    
+    filter_close.addEventListener('click', function() {
+        filter.style.display = 'none';
+    });
+
+    function submit_filter() {
+        filter.style.display = 'none';
+    }
+
+
+
+    // 부스
+    const place = document.getElementById('place_wrap');
+    const place_btns = document.getElementsByClassName('place_btn');
+    const booth_sites = document.getElementsByClassName("booth_site");
+
+    const place_title = document.getElementById('place_title');
+    const place_title_ex = document.getElementById('place_title_ex');
+    const place_maps = document.getElementsByClassName('place_map');
+    const place_containers = document.getElementsByClassName('place_container');
+    var box;
+
+    function resetPlace() {
+        for (var map of place_maps) {
+            map.style.display = "none"
+        }
+        for (var container of place_containers) {
+            container.style.display = "none"
+        }
+    }
+
+    // 부스 장소 열기
+    for (let i = 0; i < place_btns.length; i++) {
+        place_btns[i].addEventListener('click', function() {
+            place.style.display = 'block';
+
+            var current_place =  booth_sites[i].textContent;
+            resetPlace();
+            place_title.innerText = current_place;
+            var booth_num = current_place.substr(2) * 1;
+
+            switch (current_place.charAt(0)) {
+                case "A":
+                    place_title_ex.innerText = '처마 밑 학생 부스';
+                    place_containers[0].style.display = "block";
+                    place_maps[0].style.display = "block";
+                    box = place_containers[0].getElementsByTagName('div')[booth_num];
+                    box.style.backgroundColor = "#F06786";
+                    break;
+                case "B":
+                    place_title_ex.innerText = '처마 밑 행정 부스';
+                    if (booth_num < 11) {
+                        place_containers[1].style.display = "block";
+                        place_maps[1].style.display = "block";
+                        box = place_containers[1].getElementsByTagName('div')[booth_num];
+                    } else {
+                        booth_num %= 10;
+                        place_containers[2].style.display = "block";
+                        place_maps[2].style.display = "block";
+                        box = place_containers[2].getElementsByTagName('div')[booth_num];
+                    }
+                    box.style.backgroundColor = "#F06786";
+                    break;
+                case "C":
+                    place_title_ex.innerText = '총학생회 부스';
+                    place_containers[2].style.display = "block";
+                    place_maps[3].style.display = "block";
+                    box = place_containers[2].getElementsByTagName('div')[booth_num];
+                    box.style.backgroundColor = "#F06786";
+                    break;
+                case "D":
+                    place_title_ex.innerText = '외부 부스';
+                    place_containers[3].style.display = "block";
+                    place_maps[4].style.display = "block";
+                    box = place_containers[3].getElementsByTagName('div')[booth_num];
+                    box.style.backgroundColor = "#F06786";
+                    break;
+                case "E":
+                    place_title_ex.innerText = '파라솔 학생 부스';
+                    place_containers[1].style.display = "block";
+                    place_maps[5].style.display = "block";
+                    box = place_containers[1].getElementsByTagName('div')[booth_num];
+                    box.style.backgroundColor = "#F06786";
+                    break;
+                case "F":
+                    place_title_ex.innerText = '캐노피 학생 부스';
+                    place_containers[2].style.display = "block";
+                    place_maps[6].style.display = "block";
+                    box = place_containers[2].getElementsByTagName('div')[booth_num];
+                    box.style.backgroundColor = "#F06786";
+                    break;
+                default:
+                    place_title_ex.innerText = '없는 장소 입니다.';
+                    break;
+            }
+        });
+    }
+
+    // 부스 장소 닫기
+    const place_close_btn = document.getElementById('place_close')
+    place_close_btn.addEventListener('click', function() {
+        place.style.display = 'none';
+        box.style.backgroundColor = "#fff";
+    });
+</script>

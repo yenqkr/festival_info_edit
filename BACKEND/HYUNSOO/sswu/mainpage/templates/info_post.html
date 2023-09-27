@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/info_post.css" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin="crossorigin"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"
+    />
+    <title>info-post</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- 상단바 -->
+      <header class="header">
+        <a
+          ><img
+            class="back"
+            src="{% static 'img/backicon.svg' %}"
+            alt="뒤로가기"
+            class="list_icon"
+            onclick="goBack()"
+        /></a>
+        <img
+          class="prism"
+          src="{% static 'img/prismPink.svg' %}"
+          alt="로고"
+          class="list_icon2"
+          id="logo"
+          onclick="Home()"
+        />
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn">
+          <div class="menu-button" onclick="toggle()">
+            <img
+              src="{% static 'img/hamburger.svg' %}"
+              alt="로고"
+              class="Group 1_pink"
+            />
+          </div>
+        </label>
+        <ul class="menu">
+          <li>
+            <a href="http://sswu-prism.com/main/timetable/">타임테이블</a>
+          </li>
+          <li>
+            <a href="http://sswu-prism.com/main/map/">축제 지도 확인하기</a>
+          </li>
+          <li>
+            <a href="http://sswu-prism.com/booth/"
+              >플리마켓 / 제휴부스 / 총학부스</a
+            >
+          </li>
+          <li>
+            <a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a>
+          </li>
+          <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+          <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+          <li><a href="{% url 'mainpage:makers' %}">만든이들</a></li>
+          <a href="{% url 'mainpage:administrator' %}">
+            <div class="box">관리자 모드</div>
+          </a>
+        </ul>
+      </header>
+      <div class="container_main" id="blur">
+        <div class="container_box">
+          <form
+            method="POST"
+            action="{%url 'mainpage:info_write'%}"
+            enctype="multipart/form-data"
+          >
+            <!-- 전체 흰색 박스 -->
+            <div class="white_box">
+              <!-- 제목,날짜 -->
+              <div class="title">
+                <h1>{{ info.title }}</h1>
+                <h2>{{ info.create_date|date:"Y.m.d" }}</h2>
+              </div>
+
+              <!-- 회색선 -->
+              <div class="line"></div>
+
+              <!-- 내용 -->
+              <div class="content">
+                <h3>{{ info.content }}</h3>
+              </div>
+
+              <!-- 사진 -->
+              <div class="slider">
+                <div class="slider-inner">
+                  {% for image in info.images.all %}
+                  <div class="slider-item">
+                    <img
+                      src="{{ image.image.url }}"
+                      alt="info_image"
+                      class="slider_img"
+                    />
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      //블러처러
+      function toggle() {
+        var blur = document.getElementById("blur");
+        blur.classList.toggle("active");
+      }
+      function Home() {
+        window.location.href = "{% url 'mainpage:mainpage' %}";
+      }
+      function goBack() {
+        window.history.back();
+      }
+      document.querySelectorAll(".slider").forEach((slider) => {
+        let innerSlider = slider.querySelector(".slider-inner");
+        let pressed = false;
+        let startx;
+        let x;
+
+        slider.addEventListener("mousedown", (e) => {
+          pressed = true;
+          startx = e.clientX - innerSlider.offsetLeft;
+          slider.style.cursor = "grabbing";
+        });
+
+        slider.addEventListener("mouseenter", () => {
+          slider.style.cursor = "grab";
+        });
+
+        slider.addEventListener("mouseup", () => {
+          slider.style.cursor = "grab";
+        });
+
+        window.addEventListener("mouseup", () => {
+          pressed = false;
+        });
+
+        slider.addEventListener("mousemove", (e) => {
+          if (!pressed) return;
+          e.preventDefault();
+          x = e.clientX;
+
+          innerSlider.style.left = `${Math.min(
+            0,
+            Math.max(
+              -(innerSlider.offsetWidth - slider.offsetWidth),
+              x - startx
+            )
+          )}px`;
+        });
+      });
+
+      function checkboundary() {
+        // 변경: checkboundary 함수 제거
+      }
+    </script>
+  </body>
+</html>

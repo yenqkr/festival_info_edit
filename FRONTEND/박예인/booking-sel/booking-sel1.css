@@ -1,0 +1,154 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+body {
+  background-color: #fcf9fb;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-family: "Pretendard-Regular";
+}
+input {
+  font-family: "Pretendard-Regular";
+}
+select {
+  color: #f194b4;
+  border-radius: 4px;
+  border: solid 1px #f194b4;
+  width: 80px;
+  height: 25px;
+  font-family: "Pretendard-Regular";
+  font-size: 11px;
+  padding-left: 18px;
+  appearance: none;
+  background: #fff url("../img/pink_arrow.png") no-repeat center right; /*화살표 이미지 넣기*/
+  background-size: 26px 26px;
+}
+select:focus {
+  outline: none;
+}
+option:focus {
+  outline: none;
+}
+.top_bar {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.back_btn {
+  float: left;
+  width: 12px;
+  height: 16px;
+}
+.logo_img {
+  display: block;
+  margin: 0 auto;
+  height: 21px;
+  width: 89px;
+}
+.ham_btn {
+  float: right;
+  width: 17px;
+  height: 15px;
+}
+.booking {
+  height: 70px;
+}
+.top {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+}
+.sparkle {
+  width: 12px;
+  height: 20px;
+}
+.booking_text {
+  color: #f06786;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.choose_ex {
+  font-size: 13px;
+}
+.goods_choose {
+  background-color: white;
+  border-radius: 7px;
+  display: flex;
+  margin-bottom: 10px;
+
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.1);
+}
+.chosen {
+  background-color: white;
+  border-radius: 7px;
+  border: #ed6888 solid 1.5px;
+  display: flex;
+  margin-bottom: 10px;
+
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.1);
+
+  position: relative; /* 추가된 부분: chosen 요소의 position 속성을 relative로 변경 */
+}
+.goods_img {
+  height: auto;
+  width: 150px;
+}
+.text {
+  width: 100%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.name {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: space-between; /* 수정된 부분: 오른쪽으로 정렬 */
+
+  width: 100%;
+}
+.goods_name {
+  font-size: 14px;
+  font-weight: bold;
+}
+.goods_price {
+  float: left;
+  font-size: 11px;
+  margin-top: 2%;
+}
+.num_select {
+  margin-top: 60px;
+}
+.detail {
+  float: right;
+  font-size: 11px;
+}
+.btn {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.check {
+  width: 36px;
+  height: 36px;
+  position: absolute; /* 추가된 부분: check 이미지의 position 속성을 absolute로 변경 */
+  top: -18px; /* 추가된 부분: 상단으로 18px만큼 이동 */
+  right: 8px; /* 추가된 부분: 오른쪽으로 18px만큼 이동 */
+
+  z-index: 1; /* 추가된 부분: z-index 값을 조절하여 겹치는 순서 조정 */
+}
+.booking_btn {
+  background-color: #f06786;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  width: 100%;
+  height: 47px;
+  font-weight: bold;
+  font-size: 14px;
+}

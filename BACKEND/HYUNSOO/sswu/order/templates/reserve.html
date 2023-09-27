@@ -1,0 +1,393 @@
+{% load static %} {% load custom_filters %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>booking-info</title>
+    <link rel="stylesheet" href="{% static 'css/reserve.css' %}" />
+
+  </head>
+  <body>
+
+    <!-- 상단바 -->
+    <header class="header">
+      <a><img class="backicon" src="{% static 'img/backicon.svg' %}" alt="뒤로가기" class="list_icon" onclick="goBack()"></a>
+      <img class="prism" src="{% static 'img/prismPink.svg' %}" alt="로고" class="list_icon2" id="logo" onclick="Home()">
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class='menu-icon' for="menu-btn">
+    <div class='menu-button' onclick="toggle()">
+      <img src="{% static 'img/hamburger.svg' %}" alt="로고" class="Group 1_pink">
+    </div>
+  </label>
+    <ul class="menu">
+      <li><a href="http://sswu-prism.com/main/timetable/">타임테이블</a></li>
+      <li><a href="http://sswu-prism.com/main/map/">축제 지도 확인하기</a></li>
+      <li><a href="http://sswu-prism.com/booth/">플리마켓 / 제휴부스 / 총학부스</a></li>
+      <li><a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a></li>
+      <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+      <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+      <li><a href="{% url 'mainpage:makers' %}">만든이들</a></li>
+      <a href="{% url 'mainpage:administrator' %}">
+          <div class="box">관리자 모드</div></a>
+    </ul>
+  </header>
+  <div class="container" id="blur">
+
+  
+
+    <form
+      method="post"
+      action="{% url 'order:reserve' %}"
+      onsubmit="showReservation(event);"
+    >
+      {% csrf_token %}
+
+
+    <!-- 굿즈 예약 설명 -->
+    <div class="booking">
+      <div class="top">
+        <img src="{% static 'img/staricon.svg' %}" alt="반짝이" class="sparkle" />
+        <span class="booking_text">굿즈 예약</span>
+      </div>
+    </div>
+    <div class="insert">
+      <div class="text">성함</div>
+      <input
+        type="text"
+        placeholder="성함을 입력해주세요."
+        class="text_input"
+        name="user_name"
+        required
+      />
+    </div>
+    <div class="insert">
+      <div class="text">연락처</div>
+      <input
+        type="text"
+        placeholder="하이픈(-) 없이 작성해주세요."
+        class="text_input"
+        name="phone_number"
+        required
+      />
+    </div>
+    <div class="insert">
+      <div class="text">이메일</div>
+      <input type="text" placeholder="ex) mutsa@gmail.com" class="text_input" name="user_mail" required/>
+    </div>
+
+    <!-- 원하는 구매 일자 -->
+    <div class="insert">
+      <div class="text">원하는 구매 일자</div>
+      <div class="select_date" style="display: flex; align-items: center;">
+        {% for choice_value, choice_label in form.purchase_date.field.choices %}
+        <label style="display: inline-block;">
+          <input
+              type="radio"
+              name="{{ form.purchase_date.name }}"
+              value="{{ choice_value }}"
+              style="opacity: 0; display:flex; z-index: -1"
+              id="radio_{{ forloop.counter }}"
+              {% if forloop.first %}required{% endif %} />
+
+        <img
+          src="{% static 'img/checkboxNull.svg' %}"
+          alt="체크 안 됨"
+          id="check_icon{{ forloop.counter }}"
+          class="check_icon"
+          onclick="toggleImage('check_icon{{ forloop.counter }}', 'radio_{{ forloop.counter }}')"        />
+        <!-- <span class="date">10월 4일</span>
+        <img
+          src="../img/checkboxNull.svg"
+          alt="체크 안 됨"
+          id="check_icon2"
+          class="check_icon"
+          onclick="toggleImage('check_icon2', 'check_icon1')"
+        /> -->
+        <!-- <span class="date">10월 5일</span> -->
+        <span class="date">{{ choice_label }}</span>
+      </label>
+      {% endfor %}
+      </div>
+    </div>
+    <!-- 구매 시간 -->
+    <div class="insert">
+      <div class="text">구매 시간</div>
+      <select class="num_select" id="time_select" name="purchase_time" required>
+        <option value="" disabled selected>시간 선택</option>
+        {% for time_value, time_label in form.purchase_time.field.choices %}
+        <option value="{{ time_value }}">{{ time_label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <hr class="back"/>
+
+      <!--선택한 상품 및 총액 확인 부분-->
+      <!-- <h3>선택한 상품</h3> -->
+      {% for good_name, good_info in request.session.selected_goods.items %}
+      <!--세션을 통해서 선택한 굿즈 정보를 가져옴-->
+
+      <!-- 예약 목록 -->
+      <div class="list">
+        <div class="select_item">
+          <span class="item">{{ good_name }} - {{ good_info.quantity }}개</span>
+          <span class="price"
+            >{{ good_info.price|multiply:good_info.quantity }}₩</span
+          >
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- <h3>총액: {{ total_price }} 원</h3> -->
+
+    <!-- 예약 버튼 -->
+    <div class="btn">
+      <button type="submit" class="booking_btn" id="modalOpenButton">예약하기</button>
+    </div>
+    {% if form.errors %}{{ form.errors }}{% endif %}
+    </form>
+
+    <!-- 팝업 -->
+
+  <div id="modalContainer" class="hidden">
+    <div id="modalContent">
+      <div class="done">
+        <p class="booking_done">예약 완료!</p>
+
+        <img src="{% static 'img/close.svg' %}" class="close" alt="닫기버튼" id="closeBtn" onclick="showGoodsList()" />
+      </div>
+      <div class="explain">
+        <p id="user-name-display" class="content"></p>
+        <p class="content">
+        해당 시간에 총학 부스에 와서 결제 후 수령해주세요.
+        </p>
+      </div>
+      {% for good_name, good_info in request.session.selected_goods.items %}
+
+      <div class="select_item">
+        <ul>
+          <div class="text2">
+            <li class="popup_item">{{ good_name }} - {{ good_info.quantity }}개</span>
+            <span class="popup_detail">{{ good_info.price|multiply:good_info.quantity }}₩</span>
+          </div>
+        </ul>
+      </div>
+      {% endfor %}
+
+      <hr />
+      <div class="select_item">
+        <span class="popup_item">예약 시간</span>
+        <p id="user-time-display" class="popup_detail"></p>
+        <!-- <span class="popup_detail">11:00 ~ 12:00</span> -->
+      </div>
+      <hr />
+      <div class="select_item">
+        <span class="total_price">총 결제 금액</span>
+        <span class="total_price2">{{ total_price }}₩</span>
+      </div>
+
+      <div class="btns">
+        <button id="HomeButton" class="home" onclick="Home()">홈으로</button>
+        <button id="goodsMoreButton" class="more" onclick="showGoodsList()">굿즈 더 보기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <!-- js -->
+    <script>
+       // 모달 창
+       const modalOpenButton = document.getElementById("modalOpenButton");
+      const HomeButton = document.getElementById("HomeButton");
+      const goodsMoreButton = document.getElementById("goodsMoreButton");
+      const closeButton = document.getElementById("closeBtn");
+      const modal = document.getElementById("modalContainer");
+      const header = document.querySelector(".header"); // header 요소 선택
+      const overlay = document.createElement("div"); // 어두운 배경을 생성
+
+      modalOpenButton.addEventListener("click", () => {
+
+      // HTML에서 전화번호 입력 필드의 값을 가져옵니다.
+      const phoneNumberInput = document.querySelector("input[name='phone_number']");
+      const phoneNumber = phoneNumberInput.value;
+
+      // 전화번호에 하이픈(-)이 포함되었는지 확인합니다.
+      if (phoneNumber.includes('-')) {
+        // alert("전화번호에 하이픈(-)을 포함할 수 없습니다.");
+        return; // 모달 창을 띄우지 않고 함수를 종료합니다.
+      }
+
+
+        modal.classList.remove("hidden");
+        overlay.style.display = "block"; // 어두운 배경 표시
+        document.body.style.overflow = "hidden"; // 스크롤 비활성화
+        header.style.filter = "brightness(50%)"; // 헤더 어둡게 만들기
+
+      });
+
+      HomeButton.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto"; // 스크롤 활성화
+        header.style.filter = "brightness(100%)"; // 헤더 복원
+      });
+      goodsMoreButton.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto"; // 스크롤 활성화
+        header.style.filter = "brightness(100%)"; // 헤더 복원
+
+      });
+      closeButton.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto"; // 스크롤 활성화
+        header.style.filter = "brightness(100%)"; // 헤더 복원
+
+      });
+
+      // 버튼 비활성화
+      document.addEventListener("DOMContentLoaded", function () {
+        const bookingBtn = document.querySelector(".booking_btn");
+        const userNameInput = document.querySelector("input[name='user_name']");
+        const phoneNumberInput = document.querySelector("input[name='phone_number']");
+        const userMailInput = document.querySelector("input[name='user_mail']");
+        const purchaseDateInputs = document.querySelectorAll("input[name='purchase_date']");
+        const purchaseTimeSelect = document.querySelector("select[name='purchase_time']");
+
+        // 예약하기 버튼의 초기 상태를 설정합니다.
+        updateBookingButtonState();
+
+        // 입력 필드나 선택 상태가 변경될 때 예약하기 버튼의 상태를 업데이트합니다.
+        userNameInput.addEventListener("input", updateBookingButtonState);
+        phoneNumberInput.addEventListener("input", updateBookingButtonState);
+        userMailInput.addEventListener("input", updateBookingButtonState);
+        purchaseDateInputs.forEach((input) => {
+          input.addEventListener("change", updateBookingButtonState);
+        });
+        purchaseTimeSelect.addEventListener("change", updateBookingButtonState);
+
+        function updateBookingButtonState() {
+          // 필수 입력 필드가 모두 입력되었고, 선택한 일자와 시간이 있는지 확인합니다.
+          const isUserNameValid = userNameInput.value.trim() !== "";
+          const isPhoneNumberValid = phoneNumberInput.value.trim() !== "";
+          const isUserMailValid = userMailInput.value.trim() !== "";
+          const isPurchaseDateSelected = Array.from(purchaseDateInputs).some(input => input.checked);
+          const isPurchaseTimeSelected = purchaseTimeSelect.value !== "";
+
+          // 모든 필수 조건이 충족되었을 때 버튼을 활성화합니다.
+          if (isUserNameValid && isPhoneNumberValid && isUserMailValid && isPurchaseDateSelected && isPurchaseTimeSelected) {
+            bookingBtn.removeAttribute("disabled");
+            bookingBtn.style.backgroundColor="#f06786"
+
+          } else {
+          bookingBtn.setAttribute("disabled", "disabled");
+          }
+        }
+      });
+
+
+
+      function showReservation(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        fetch("{% url 'order:reserve' %}", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              const userName =
+                document.querySelector("[name='user_name']").value;
+              const userNameDisplay = document.getElementById("user-name-display");
+              userNameDisplay.textContent = userName+'님의 굿즈 구매 예약이 완료되었습니다!';
+
+
+              let goodInfo = "";
+              const goodsElements = document.querySelectorAll("h4, p");
+              goodsElements.forEach((el) => {
+                goodInfo += el.innerText + "\n";
+              });
+
+              const purchaseDate = document.querySelector(
+                "[name='purchase_date']"
+              ).value;
+              const purchaseTime = document.querySelector(
+                "[name ='purchase_time']"
+              ).value;
+              const userTimeDisplay = document.getElementById("user-time-display");
+              userTimeDisplay.textContent = purchaseTime;
+
+              const totalPrice = "{{ total_price }}";
+
+              const message =
+                "예약이 완료되었습니다. \n\n" +
+                userName +
+                "님의 굿즈 구매 예약이 완료되었습니다!\n 해당 시간에 총학 부스에 와서 결제 후 수령해주세요.\n" +
+                goodInfo +
+                "\n" +
+                "예약시간: " +
+                purchaseTime +
+                "총 금액: " +
+                totalPrice +
+                "원";
+
+              const popupContent = document.getElementById("popup-content");
+              popupContent.innerText = message;
+
+              document.getElementById("popup").style.display = "block";
+            } 
+            else {
+              alert("예약 중 오류가 발생했습니다. 다시 시도해주세요.");
+            }
+          });
+      }
+      // 홈으로 가기(로고 클릭, 팝업 홈으로 가기)
+      function Home() {
+        window.location.href = "{% url 'mainpage:mainpage' %}";
+      }
+      // 굿즈 더보기(팝업)
+      function showGoodsList() {
+        window.location.href = "{% url 'order:goods_list' %}";
+      }
+
+      // 뒤로가기
+      function goBack() {
+    window.history.back();
+    }
+
+      // 나머지 js
+      function toggle(){
+        var blur=document.getElementById('blur');
+        blur.classList.toggle('active')
+      }
+
+      //   날짜 선택
+      let isChecked1 = false; // 10월 4일 이미지 상태
+      let isChecked2 = false; // 10월 5일 이미지 상태
+
+      function toggleImage(iconId, radioId) {
+        const icon = document.getElementById(iconId);
+        const radio = document.getElementById(radioId);
+
+        if (!radio.checked) {
+          // 모든 아이콘을 초기 상태로 설정합니다.
+          document.querySelectorAll(".check_icon").forEach((iconElem) => {
+            iconElem.setAttribute("src", "{% static 'img/checkboxNull.svg' %}");
+          });
+          // 선택한 아이콘만 체크 상태로 변경합니다.
+          icon.setAttribute("src", "{% static 'img/checkbox.svg' %}");
+          radio.checked = true;
+        }
+      }
+
+
+
+
+
+    </script>
+  </body>
+</html>

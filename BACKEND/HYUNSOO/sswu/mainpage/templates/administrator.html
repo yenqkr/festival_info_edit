@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>administrator</title>
+    <link rel="stylesheet" href="/static/css/administrator.css" />
+  </head>
+
+  <body>
+    <!-- <div class="bar"> 
+        <a><img src="images/backicon.svg" alt="뒤로가기" class="list_icon"></a>
+        <img src="images/prismPink.svg" alt="로고" class="list_icon" id="logo">
+        <a><img src="images/hamburger.svg" alt="목록" class="list_icon"></a>
+    </div> -->
+    <header class="header">
+      <a
+        ><img
+          class="back"
+          src="{% static 'img/backicon.svg' %}"
+          alt="뒤로가기"
+          class="list_icon"
+          onclick="goBack()"
+      /></a>
+      <img
+        class="prism"
+        src="{% static 'img/prismPink.svg' %}"
+        alt="로고"
+        class="list_icon2"
+        id="logo"
+        onclick="Home()"
+      />
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn">
+        <div class="menu-button" onclick="toggle()">
+          <img
+            src="{% static 'img/hamburger.svg' %}"
+            alt="로고"
+            class="Group 1_pink"
+          />
+        </div>
+      </label>
+      <ul class="menu">
+        <li><a href="http://sswu-prism.com/main/timetable/">타임테이블</a></li>
+        <li>
+          <a href="http://sswu-prism.com/main/map/">축제 지도 확인하기</a>
+        </li>
+        <li>
+          <a href="http://sswu-prism.com/booth/"
+            >플리마켓 / 제휴부스 / 총학부스</a
+          >
+        </li>
+        <li>
+          <a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a>
+        </li>
+        <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+        <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+        <li><a href="{% url 'mainpage:makers' %}">만든이들</a></li>
+        <a href="{% url 'mainpage:administrator' %}">
+          <div class="box">관리자 모드</div>
+        </a>
+      </ul>
+    </header>
+    <div class="container" id="blur">
+      <main>
+        <p id="login-exp">
+          관리자 모드를 이용하기 위해서는<br />
+          아이디와 비밀번호를 입력해주세요 :)
+        </p>
+        <div class="login-form">
+          <form method="POST" action="{% url 'mainpage:administrator' %}">
+            {% csrf_token %}
+            <p class="exp">아이디</p>
+            <input
+              type="text"
+              name="custom_id"
+              class="text-field"
+              placeholder="아이디를 입력해주세요."
+            />
+            <p class="exp">비밀번호</p>
+            <input
+              type="text"
+              name="password"
+              class="text-field"
+              placeholder="비밀번호를 입력해주세요."
+            />
+            <div class="ad-btn">
+              <input
+                type="button"
+                value="이전으로"
+                class="preview-btn"
+                id="goBackButton"
+              />
+              <input type="submit" value="다음" class="submit-btn" />
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script type="text/javascript">
+      function toggle() {
+        var blur = document.getElementById("blur");
+        blur.classList.toggle("active");
+      }
+      function Home() {
+        window.location.href = "{% url 'mainpage:mainpage' %}";
+      }
+      function goBack() {
+        window.history.back();
+      }
+      document
+        .getElementById("goBackButton")
+        .addEventListener("click", function () {
+          window.history.back(); // 뒤로 가기 동작 수행
+        });
+    </script>
+  </body>
+</html>

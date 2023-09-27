@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>visitor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="{% static 'css/visitor.css' %}" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/visitor.js' %}"></script>
+</head>
+<body>
+    <!-- 헤더는 나중에 js로 연결하기 -->
+    <header class="header">
+        <a><img class="back" src="{% static 'img/backicon.svg' %}" alt="뒤로가기" class="list_icon"></a>
+        <img class="prism" src="{% static 'img/prismPink.svg' %}" alt="로고" class="list_icon2" id="logo">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class='menu-icon' for="menu-btn" onclick="toggle()">
+        <div class='menu-button'>
+            <img src="{% static 'img/hamburger.svg' %}" alt="로고" class="Group 1_pink">
+        </div>
+        </label>
+        <ul class="menu">
+            <li><a href="#">타임테이블</a></li>
+            <li><a href="#">축제 지도 확인하기</a></li>
+            <li><a href="#">플리마켓 / 제휴부스 / 총학부스</a></li>
+            <li><a href="#">굿즈 구매 예약</a></li>
+            <li><a href="#">공지사항</a></li>
+            <li><a href="#">방명록</a></li>
+            <li><a href="#">만든이들</a></li>
+            <a href="#"><div class="box">관리자 모드</div></a>
+        </ul>
+    </header>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="container_main" id="blur">
+    <main>
+    <div id="wrap">
+        <div id="title">
+            <div class="title_photo">
+                <img src="{% static 'img/staricon.svg' %}"></img>
+            </div>
+            <div class="title_tx">방명록</div>
+        </div>
+        <div class="container">
+            <div class="title_ex">수정이들의 소중한 방명록!</div>
+            <!-- 글쓰기 화면과 연결하기 -->
+            <a href="{% url 'visitor:visitor_write' %}" class="write_btn">
+                <div class="write_btn_tx">방명록 작성하기</div>
+            </a>
+
+            <!-- 백엔드랑 연결할 부분 -->
+            {% for visitor in visitor_list %}
+            <div class="writing">
+                <div class="writing_tx">{{visitor.content}}</div>
+                <div class="writing_info">
+                    <span class="nickname">{{visitor.nickname}}</span>
+                    <span class="date">{{ visitor.date |date:"Y.m.d" }}</span>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- 더보기 버튼 -->
+            <div id="more">
+                <!-- <span>+ 더보기</span> -->
+                <button onclick="loadItem()">+ 더보기</button>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+</form>
+<script type="text/javascript">
+    function toggle(){
+        var blur=document.getElementById('blur');
+        blur.classList.toggle('active')
+    }
+    </script>
+</body>
+</html>

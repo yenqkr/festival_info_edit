@@ -1,0 +1,9 @@
+/venv/
+/mainpage/migrations/
+/config/__pyache__/
+/mainpage/__pyache__/
+/.idea/
+/workspace.xml
+/shelf/
+
+__pyache__/

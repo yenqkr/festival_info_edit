@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>booking</title>
+    <link rel="stylesheet" href="booking.css" />
+  </head>
+  <body>
+    <!-- 상단바 -->
+    <!-- <div class="top_bar">
+      <a href="https://">
+        <img src="..\img\backicon.svg" alt="백버튼" class="back_btn"
+      /></a>
+      <a href="https://">
+        <img src="..\img\prismPink.svg" alt="로고" class="logo_img"
+      /></a>
+      <a href="https://">
+        <img src="..\img\hamburger.svg" alt="햄버거 버튼" class="ham_btn"
+      /></a>
+    </div> -->
+    <header class="header">
+      <a
+        ><img
+          class="back"
+          src="..\img\backicon.svg"
+          alt="뒤로가기"
+          class="list_icon"
+      /></a>
+      <img
+        class="prism"
+        src="..\img\prismPink.svg"
+        alt="로고"
+        class="list_icon2"
+        id="logo"
+      />
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn">
+        <div class="menu-button" onclick="toggle()">
+          <img src="..\img\hamburger.svg" alt="로고" class="Group 1_pink" />
+        </div>
+      </label>
+      <ul class="menu">
+        <li><a href="#">타임테이블</a></li>
+        <li><a href="#">축제 지도 확인하기</a></li>
+        <li><a href="#">플리마켓 / 제휴부스 / 총학부스</a></li>
+        <li><a href="#">굿즈 구매 예약</a></li>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">방명록</a></li>
+        <li><a href="#">만든이들</a></li>
+        <a href="#"><div class="box">관리자 모드</div></a>
+      </ul>
+    </header>
+    <div class="container" id="blur">
+      <!-- 굿즈 예약 설명 -->
+      <div class="booking">
+        <div class="top">
+          <img src="..\img\staricon.svg" alt="반짝이" class="sparkle" />
+          <span class="booking_text">굿즈 예약</span>
+        </div>
+        <div class="choose">
+          <p class="choose_ex">구매하고 싶은 굿즈들을 선택해주세요!</p>
+          <img
+            src="..\img\mini_button_goods.svg"
+            alt="굿즈 상세보기"
+            class="detail_btn"
+          />
+        </div>
+      </div>
+      <!-- 굿즈 선택 1 -->
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\griptok.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">아크릴 그립톡</span>
+          </div>
+          <span class="goods_price">7,500₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 2 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\half_griptok.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">반구 그립톡</span>
+          </div>
+          <span class="goods_price">9,000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 3 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\pouch.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">PVC 파우치</span>
+          </div>
+          <span class="goods_price">3,000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 4 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\cheer.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">응원봉</span>
+          </div>
+          <span class="goods_price">3,000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 5 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\tatoo.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">타투 스티커</span>
+          </div>
+          <span class="goods_price">3,000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 6 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\keyring.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">키링</span>
+          </div>
+          <span class="goods_price">7,000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 7 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\slogan.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">슬로건</span>
+          </div>
+          <span class="goods_price">5,000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 8 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\bandanna.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">반다나</span>
+          </div>
+          <span class="goods_price">5,000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 9 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\prism_set.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">PRISM SET</span>
+          </div>
+          <span class="goods_price">24,0000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 굿즈 선택 10 -->
+
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="..\img\checkicon.svg" alt="체크" class="check" />
+        <img src="..\img\crystal_set.png" alt="prism 볼펜" class="goods_img" />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">CRYSTAL SET</span>
+          </div>
+          <span class="goods_price">14,000₩</span>
+          <select class="num_select" id="num">
+            <option value="" disabled selected>개수</option>
+            <option value="one">1개</option>
+            <option value="two">2개</option>
+            <option value="three">3개</option>
+            <option value="four">4개</option>
+            <option value="five">5개</option>
+            <option value="six">6개</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 예약버튼 -->
+      <div class="btn">
+        <input
+          type="button"
+          class="booking_btn"
+          value="선택한 굿즈들 예약하기"
+          id="bookingBtn"
+        />
+      </div>
+    </div>
+
+    <!-- js -->
+    <script>
+      // nav클릭시 blur처리
+      function toggle() {
+        var blur = document.getElementById("blur");
+        blur.classList.toggle("active");
+      }
+      // select 요소의 변경 이벤트를 감지하는 함수를 추가합니다.
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectElements = document.querySelectorAll(".num_select");
+
+        selectElements.forEach(function (selectElement) {
+          selectElement.addEventListener("change", function () {
+            const checkImage =
+              this.closest(".goods_choose").querySelector(".check");
+
+            if (this.value !== "") {
+              checkImage.style.display = "block";
+              goodsChoose.style.border = "2px solid blue"; // 선택한 옵션이 있을 때 border 추가
+            } else {
+              checkImage.style.display = "none";
+              goodsChoose.style.border = "none"; // 선택한 옵션이 없을 때 border 제거
+            }
+          });
+        });
+      });
+
+      // 문서가 로드될 때 실행할 함수를 추가합니다.
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectElements = document.querySelectorAll(".num_select");
+
+        selectElements.forEach(function (selectElement) {
+          selectElement.addEventListener("change", function () {
+            // 해당 select 요소에 대한 goods_choose 요소를 찾습니다.
+            const goodsChoose = this.closest(".goods_choose");
+
+            // 선택한 옵션이 비어 있지 않은 경우에만 테두리를 추가합니다.
+            if (this.value !== "") {
+              goodsChoose.style.border = "1px solid #f06786";
+            } else {
+              goodsChoose.style.border = "none"; // 선택한 옵션이 없을 때 테두리를 제거합니다.
+            }
+          });
+        });
+      });
+
+      // 문서가 로드될 때 실행할 함수를 추가합니다.
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectElements = document.querySelectorAll(".num_select");
+        const bookingBtn = document.querySelector(".booking_btn");
+
+        selectElements.forEach(function (selectElement) {
+          selectElement.addEventListener("change", function () {
+            // 모든 select 요소를 확인하여 하나 이상의 옵션이 선택되었는지 확인합니다.
+            let atLeastOneOptionSelected = false;
+            selectElements.forEach(function (element) {
+              if (element.value !== "") {
+                atLeastOneOptionSelected = true;
+              }
+            });
+
+            // 하나 이상의 옵션이 선택되었는지에 따라 버튼의 CSS 색상을 변경합니다.
+            if (atLeastOneOptionSelected) {
+              bookingBtn.style.backgroundColor = "#F06786"; // 버튼의 색상을 변경합니다.
+            } else {
+              bookingBtn.style.backgroundColor = ""; // 선택한 옵션이 없을 때 기본 색상으로 변경합니다.
+            }
+          });
+        });
+      });
+
+      // 예약 버튼과 select 요소들을 가져옵니다.
+      const bookingBtn = document.getElementById("bookingBtn");
+      const selectElements = document.querySelectorAll(".num_select");
+
+      // select 요소가 변경될 때마다 실행되는 함수를 정의합니다.
+      function handleSelectChange() {
+        let atLeastOneOptionSelected = false;
+
+        // 모든 select 요소를 확인하여 옵션이 하나 이상 선택되었는지 확인합니다.
+        selectElements.forEach(function (selectElement) {
+          if (selectElement.value !== "") {
+            atLeastOneOptionSelected = true;
+          }
+        });
+
+        // 하나 이상의 옵션이 선택되었는지에 따라 버튼의 CSS 색상을 변경합니다.
+        if (atLeastOneOptionSelected) {
+          bookingBtn.style.backgroundColor = "#F06786"; // 버튼의 색상을 변경합니다.
+          // 예약 버튼을 클릭했을 때, 원하는 페이지로 이동하도록 설정합니다.
+          bookingBtn.addEventListener("click", function () {
+            window.location.href = "https://www.naver.com"; // 여기에 이동할 페이지의 URL을 넣으세요.
+          });
+        } else {
+          bookingBtn.style.backgroundColor = ""; // 선택한 옵션이 없을 때 기본 색상으로 변경합니다.
+          bookingBtn.removeEventListener("click", function () {
+            window.location.href = "https://www.naver.com"; // 이전에 설정된 이벤트 제거
+          });
+        }
+      }
+
+      // 모든 select 요소에 대한 변경 이벤트 리스너를 추가합니다.
+      selectElements.forEach(function (selectElement) {
+        selectElement.addEventListener("change", handleSelectChange);
+      });
+    </script>
+  </body>
+</html>

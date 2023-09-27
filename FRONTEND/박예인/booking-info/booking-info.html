@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>booking-info</title>
+    <link rel="stylesheet" href="booking-info.css" />
+  </head>
+  <body>
+    <!-- 상단바 -->
+    <header class="header">
+      <a><img class="backicon" src="..\img\backicon.svg" alt="뒤로가기" class="list_icon"></a>
+      <img class="prism" src="..\img\prismPink.svg" alt="로고" class="list_icon2" id="logo">
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class='menu-icon' for="menu-btn">
+    <div class='menu-button' onclick="toggle()">
+      <img src="..\img\hamburger.svg" alt="로고" class="Group 1_pink">
+    </div>
+  </label>
+    <ul class="menu">
+        <li><a href="#">타임테이블</a></li>
+        <li><a href="#">축제 지도 확인하기</a></li>
+        <li><a href="#">플리마켓 / 제휴부스 / 총학부스</a></li>
+        <li><a href="#">굿즈 구매 예약</a></li>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">방명록</a></li>
+        <li><a href="#">만든이들</a></li>
+        <a href="#"><div class="box">관리자 모드</div></a>
+    </ul>
+  </header>
+  <div class="container" id="blur">
+    <!-- 굿즈 예약 설명 -->
+    <div class="booking">
+      <div class="top">
+        <img src="..\img\staricon.svg" alt="반짝이" class="sparkle" />
+        <span class="booking_text">굿즈 예약</span>
+      </div>
+    </div>
+    <div class="insert">
+      <div class="text">성함</div>
+      <input
+        type="text"
+        placeholder="성함을 입력해주세요."
+        class="text_input"
+      />
+    </div>
+    <div class="insert">
+      <div class="text">연락처</div>
+      <input
+        type="text"
+        placeholder="하이픈(-) 없이 작성해주세요."
+        class="text_input"
+      />
+    </div>
+    <div class="insert">
+      <div class="text">이메일</div>
+      <input type="text" placeholder="ex) mutsa@gmail.com" class="text_input" />
+    </div>
+    <!-- 원하는 구매 일자 -->
+    <div class="insert">
+      <div class="text">원하는 구매 일자</div>
+      <div class="select_date">
+        <img
+          src="../img/checkboxNull.svg"
+          alt="체크 안 됨"
+          id="check_icon1"
+          class="check_icon"
+          onclick="toggleImage('check_icon1', 'check_icon2')"
+        />
+        <span class="date">10월 4일</span>
+        <img
+          src="../img/checkboxNull.svg"
+          alt="체크 안 됨"
+          id="check_icon2"
+          class="check_icon"
+          onclick="toggleImage('check_icon2', 'check_icon1')"
+        />
+        <span class="date">10월 5일</span>
+      </div>
+    </div>
+    <!-- 구매 시간 -->
+    <div class="insert">
+      <div class="text">구매 시간</div>
+      <select class="num_select" id="time_select">
+        <option value="" disabled selected>시간 선택</option>
+        <option value="one">11:00 ~ 12:00</option>
+        <option value="two">12:00 ~ 13:00</option>
+        <option value="three">13:00 ~ 14:00</option>
+        <option value="four">14:00 ~ 15:00</option>
+        <option value="five">17:00 ~ 18:00</option>
+        <option value="six">18:00 ~ 19:00</option>
+      </select>
+    </div>
+    <hr class="back"/>
+    <!-- 예약 목록 -->
+    <div class="list">
+      <div class="select_item">
+        <span class="item">PRISM 볼펜 - 1개</span>
+        <span class="price">1,500₩</span>
+      </div>
+      <div class="select_item">
+        <span class="item">PRISM 시리얼컵 - 1개</span>
+        <span class="price">12,000₩</span>
+      </div>
+    </div>
+    <!-- 예약 버튼 -->
+    <div class="btn">
+        <input
+          type="button"
+          class="booking_btn"
+          value="예약하기"
+          id="modalOpenButton"
+        />
+    </div>
+
+    <!-- 모달 창 -->
+    <div id="modalContainer" class="hidden">
+      <div id="modalContent">
+        <div class="done">
+          <p class="booking_done">예약 완료!</p>
+
+          <img src="..\img\close.svg" class="close" alt="닫기버튼" id="closeBtn" />
+        </div>
+        <div class="explain">
+          <p class="content">송지연 님의 굿즈 구매 예약이 완료되었습니다!</p>
+          <p class="content">
+          해당 시간에 총학 부스에 와서 결제 후 수령해주세요.
+          </p>
+        </div>
+        <div class="select_item">
+          <ul>
+            <div class="text2">
+              <li class="popup_item">PRISM 볼펜 - 1개</span>
+              <span class="popup_detail">1,500₩</span>
+            </div>
+            <div class="text2">
+              <li class="popup_item">PRISM 시리얼컵 - 1개</span>
+              <span class="popup_detail">12,000₩</span>
+            </div>
+          </ul>
+        </div>
+        <hr />
+        <div class="select_item">
+          <span class="popup_item">예약 시간</span>
+          <span class="popup_detail">11:00 ~ 12:00</span>
+        </div>
+        <hr />
+        <div class="select_item">
+          <span class="total_price">총 결제 금액</span>
+          <span class="total_price2">13,500₩</span>
+        </div>
+
+        <!-- btns를 modalContent 내에 위치시킵니다. -->
+        <div class="btns">
+          <button id="HomeButton" class="home">홈으로</button>
+          <button id="goodsMoreButton" class="more">굿즈 더 보기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    <!-- js -->
+    <script>
+      function toggle(){
+        var blur=document.getElementById('blur');
+        blur.classList.toggle('active')
+      }
+
+      let isChecked1 = false; // 10월 4일 이미지 상태
+      let isChecked2 = false; // 10월 5일 이미지 상태
+
+      function toggleImage(id1, id2) {
+        const icon1 = document.getElementById(id1);
+        const icon2 = document.getElementById(id2);
+
+        if (icon1.getAttribute("src") === "../img/checkbox.svg") {
+          icon1.setAttribute("src", "../img/checkboxNull.svg");
+        } else {
+          icon1.setAttribute("src", "../img/checkbox.svg");
+          icon2.setAttribute("src", "../img/checkboxNull.svg");
+        }
+      }
+
+      
+      // 모달 창
+      const modalOpenButton = document.getElementById("modalOpenButton");
+      const HomeButton = document.getElementById("HomeButton");
+      const goodsMoreButton = document.getElementById("goodsMoreButton");
+      const closeButton = document.getElementById("closeBtn");
+      const modal = document.getElementById("modalContainer");
+      const header = document.querySelector(".header"); // header 요소 선택
+      const overlay = document.createElement("div"); // 어두운 배경을 생성
+
+      modalOpenButton.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+        overlay.style.display = "block"; // 어두운 배경 표시
+        document.body.style.overflow = "hidden"; // 스크롤 비활성화
+        header.style.filter = "brightness(50%)"; // 헤더 어둡게 만들기
+
+      });
+
+      HomeButton.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto"; // 스크롤 활성화
+        header.style.filter = "brightness(100%)"; // 헤더 복원
+      });
+      goodsMoreButton.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto"; // 스크롤 활성화
+        header.style.filter = "brightness(100%)"; // 헤더 복원
+
+      });
+      closeButton.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto"; // 스크롤 활성화
+        header.style.filter = "brightness(100%)"; // 헤더 복원
+
+      });
+
+
+
+    </script>
+  </body>
+</html>

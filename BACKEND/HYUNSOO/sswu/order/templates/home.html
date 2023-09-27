@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/goods_list.css' %}" />
+    <title>goods_detail</title>
+  </head>
+  <body>
+    <header class="header">
+      <a
+        ><img
+          class="back"
+          src="{% static 'img/backicon.svg' %}"
+          alt="뒤로가기"
+          class="list_icon"
+          onclick="goBack()"
+      /></a>
+      <img
+        class="prism"
+        src="{% static 'img/prismPink.svg' %}"
+        alt="로고"
+        class="list_icon2"
+        id="logo"
+        onclick="Home()"
+      />
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn">
+        <div class="menu-button" onclick="toggle()">
+          <img
+            src="{% static 'img/hamburger.svg' %}"
+            alt="로고"
+            class="Group 1_pink"
+          />
+        </div>
+      </label>
+      <ul class="menu">
+          <li><a href="http://sswu-prism.com/main/timetable/">타임테이블</a></li>
+          <li><a href="http://sswu-prism.com/main/map/">축제 지도 확인하기</a></li>
+          <li><a href="http://sswu-prism.com/booth/">플리마켓 / 제휴부스 / 총학부스</a></li>
+          <li><a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a></li>
+          <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+          <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+          <li><a href="../../../../../FRONTEND/박예인/makers/makers.html">만든이들</a></li>
+          <a href="{% url 'mainpage:administrator' %}">
+              <div class="box">관리자 모드</div>
+          </a>
+        </ul>
+
+    </header>
+    <div class="container" id="blur">
+      <img
+        src="{% static 'img/new_goods_detail.png' %}"
+        alt="디테일컷"
+        id="modalBtn"
+        style="width: 100%; margin: auto; display: block"
+      />
+    <script>
+      // nav클릭시 blur처리
+      function toggle() {
+        var blur = document.getElementById("blur");
+        blur.classList.toggle("active");
+      }
+      function Home() {
+        window.location.href = "{% url 'mainpage:mainpage' %}";
+      }
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>

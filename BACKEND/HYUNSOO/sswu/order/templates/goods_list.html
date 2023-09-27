@@ -1,0 +1,322 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/goods_list.css' %}" />
+
+    <title>booking</title>
+  </head>
+  <body>
+    <!-- 상단바 -->
+    <!-- <div class="top_bar">
+      <a href="https://">
+        <img
+          src="{% static 'img/backicon.svg' %}"
+          alt="백버튼"
+          class="back_btn"
+      /></a>
+      <a href="https://">
+        <img src="{% static 'img/prismPink.svg' %}" alt="로고" class="logo_img"
+      /></a>
+      <a href="https://">
+        <img
+          src="{% static 'img/hamburger.svg' %}"
+          alt="햄버거 버튼"
+          class="ham_btn"
+      /></a>
+    </div> -->
+    <header class="header">
+      <a
+        ><img
+          class="back"
+          src="{% static 'img/backicon.svg' %}"
+          alt="뒤로가기"
+          class="list_icon"
+          onclick="goBack()"
+      /></a>
+      <img
+        class="prism"
+        src="{% static 'img/prismPink.svg' %}"
+        alt="로고"
+        class="list_icon2"
+        id="logo"
+        onclick="Home()"
+      />
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn">
+        <div class="menu-button" onclick="toggle()">
+          <img
+            src="{% static 'img/hamburger.svg' %}"
+            alt="로고"
+            class="Group 1_pink"
+          />
+        </div>
+      </label>
+      <ul class="menu">
+          <li><a href="http://sswu-prism.com/main/timetable/">타임테이블</a></li>
+          <li><a href="http://sswu-prism.com/main/map/">축제 지도 확인하기</a></li>
+          <li><a href="http://sswu-prism.com/booth/">플리마켓 / 제휴부스 / 총학부스</a></li>
+          <li><a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a></li>
+          <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+          <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+          <li><a href="{% url 'mainpage:makers' %}">만든이들</a></li>
+          <a href="{% url 'mainpage:administrator' %}">
+              <div class="box">관리자 모드</div>
+          </a>
+      </ul>
+
+    </header>
+    <div class="container" id="blur">
+      
+    <!-- </div> -->
+
+    <!-- 굿즈 예약 설명 -->
+    <div class="booking">
+      <div class="top">
+        <img
+          src="{% static 'img/staricon.svg' %}"
+          alt="반짝이"
+          class="sparkle"
+        />
+        <span class="booking_text">굿즈 예약</span>
+      </div>
+      <div class="choose">
+        <p class="choose_ex">구매하고 싶은 굿즈들을 선택해주세요!</p>
+        <img
+        src="{% static 'img/mini_button_goods.svg' %}"
+        alt="굿즈 상세보기"
+        class="detail_btn"
+        id="modalBtn"
+        onclick="detail()"
+
+      />
+      </div>
+    </div>
+    <!-- 상세 이미지 -->
+    <div id="myModal" class="modal">
+      <!-- <span class="close" id="closeBtn">&times;</span> -->
+      <img src="{% static 'img/goods_detail.png' %}" alt="디테일컷" class="modal-content" id="modalBtn">
+      <img src="{% static 'img/close.svg' %}" alt="close" class="closebtn" id="close">
+    </div>
+
+
+    <form method="post" action="{% url 'order:goods_list' %}">
+      {% csrf_token %} {% for good in goods %}
+      <!--반복문을 돌면서 admin에서 미리 저장해둔 굿즈 목록을 반환함.-->
+
+      <!-- 굿즈 선택 1 -->
+      <div class="goods_choose" onclick="toggleGoods(this)">
+        <img src="{% static 'img/checkicon.svg' %}" alt="체크" class="check" id="checkimg" />
+        <img
+          src="{{ good.image.url }}"
+          alt="{{ good.name }}"
+          class="goods_img"
+        />
+        <div class="text">
+          <div class="name">
+            <span class="goods_name">{{ good.name }}</span>
+          </div>
+          <span class="goods_price">{{ good.price }}₩</span>
+          <select class="num_select" id="num" name="quantity_{{good.id}}">
+            <option value="" disabled selected>개수</option>
+            <option value="" class="noChoose">선택없음</option>
+            {% for i in "123456789"|make_list %}
+            <!--수량을 선택-->
+            <option value="{{ i }}" class="cnt">{{ i }}개</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- 예약버튼 -->
+      <div class="btn">
+        <input
+          type="submit"
+          class="booking_btn"
+          value="선택한 굿즈들 예약하기"
+          id="bookingBtn"
+        />
+      </div>
+    </form>
+  </body>
+    <!-- js -->
+    <script>
+      // nav클릭시 blur처리
+      function toggle() {
+        var blur = document.getElementById("blur");
+        blur.classList.toggle("active");
+      }
+      // select 요소의 변경 이벤트를 감지하는 함수를 추가합니다.
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectElements = document.querySelectorAll(".num_select");
+
+        selectElements.forEach(function (selectElement) {
+          selectElement.addEventListener("change", function () {
+            const checkImage =
+              this.closest(".goods_choose").querySelector(".check");
+
+            if (this.value !== "" && this.value !== "선택 없음") {
+              checkImage.style.display = "block";
+              goodsChoose.style.border = "2px solid blue"; // 선택한 옵션이 있을 때 border 추가
+            } else {
+              checkImage.style.display = "none";
+              goodsChoose.style.border = "none"; // 선택한 옵션이 없을 때 border 제거
+            }
+          });
+        });
+      });
+
+      // 문서가 로드될 때 실행할 함수를 추가합니다.
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectElements = document.querySelectorAll(".num_select");
+
+        selectElements.forEach(function (selectElement) {
+          selectElement.addEventListener("change", function () {
+            // 해당 select 요소에 대한 goods_choose 요소를 찾습니다.
+            const goodsChoose = this.closest(".goods_choose");
+
+            // 선택한 옵션이 비어 있지 않은 경우에만 테두리를 추가합니다.
+            if (this.value !== "") {
+              goodsChoose.style.border = "1px solid #f06786";
+            } else {
+              goodsChoose.style.border = "none"; // 선택한 옵션이 없을 때 테두리를 제거합니다.
+            }
+          });
+        });
+      });
+
+      // 문서가 로드될 때 실행할 함수를 추가합니다.
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectElements = document.querySelectorAll(".num_select");
+        const bookingBtn = document.querySelector(".booking_btn");
+
+        selectElements.forEach(function (selectElement) {
+          selectElement.addEventListener("change", function () {
+            // 모든 select 요소를 확인하여 하나 이상의 옵션이 선택되었는지 확인합니다.
+            let atLeastOneOptionSelected = false;
+            selectElements.forEach(function (element) {
+              if (element.value !== "") {
+                atLeastOneOptionSelected = true;
+              }
+            });
+
+            // 하나 이상의 옵션이 선택되었는지에 따라 버튼의 CSS 색상을 변경합니다.
+            if (atLeastOneOptionSelected) {
+              bookingBtn.style.backgroundColor = "#F06786"; // 버튼의 색상을 변경합니다.
+            } else {
+              bookingBtn.style.backgroundColor = ""; // 선택한 옵션이 없을 때 기본 색상으로 변경합니다.
+            }
+          });
+        });
+      });
+
+      // 예약 버튼과 select 요소들을 가져옵니다.
+      const bookingBtn = document.getElementById("bookingBtn");
+      const selectElements = document.querySelectorAll(".num_select");
+
+      bookingBtn.disabled = true;
+
+
+      // select 요소가 변경될 때마다 실행되는 함수를 정의합니다.
+      function handleSelectChange() {
+        let atLeastOneOptionSelected = false;
+
+        // 모든 select 요소를 확인하여 옵션이 하나 이상 선택되었는지 확인합니다.
+        selectElements.forEach(function (selectElement) {
+          if (selectElement.value !== "") {
+            atLeastOneOptionSelected = true;
+          }
+        });
+
+        // 하나 이상의 옵션이 선택되었는지에 따라 버튼의 CSS 색상을 변경합니다.
+        if (atLeastOneOptionSelected) {
+          bookingBtn.style.backgroundColor = "#F06786"; // 버튼의 색상을 변경합니다.
+          bookingBtn.disabled = false; // 선택된 옵션이 있을 때 버튼을 활성화합니다.
+
+          // 예약 버튼을 클릭했을 때, 원하는 페이지로 이동하도록 설정합니다.
+          bookingBtn.addEventListener("click", function () {
+            window.location.href = "https://www.naver.com"; // 여기에 이동할 페이지의 URL을 넣으세요.
+          });
+        } else {handleSelectChange
+          bookingBtn.style.backgroundColor = ""; // 선택한 옵션이 없을 때 기본 색상으로 변경합니다.
+          bookingBtn.disabled = true; // 선택된 옵션이 없을 때 버튼을 비활성화합니다.
+
+          bookingBtn.removeEventListener("click", function () {
+            window.location.href = ""; // 이전에 설정된 이벤트 제거
+          });
+        }
+      }
+
+      // 모든 select 요소에 대한 변경 이벤트 리스너를 추가합니다.
+      selectElements.forEach(function (selectElement) {
+        selectElement.addEventListener("change", handleSelectChange);
+      });
+
+      // select 간격
+      // num select 요소 선택
+      var numSelect = document.getElementById("num");
+
+      // num select 요소의 change 이벤트 감지
+      numSelect.addEventListener("change", function () {
+        // 선택된 옵션의 클래스 확인
+        var selectedOption = this.options[this.selectedIndex];
+
+        // 선택된 옵션이 cnt 클래스를 가지고 있다면
+        if (selectedOption.classList.contains("cnt")) {
+          // padding-left 값을 변경
+          selectedOption.style.paddingLeft = "28px";
+        } else {
+          // 다른 옵션을 선택한 경우, 기본 padding-left 값을 설정
+          selectedOption.style.paddingLeft = "10px";
+        }
+      });
+      var modal = document.getElementById("myModal");
+      var modalContent = document.getElementById("modal-content"); // 모달 이미지 요소
+var modalBtn = document.getElementById("modalBtn");
+var closeBtn = document.getElementById("closeBtn");
+var closeb = document.getElementById("close");
+
+
+// modalBtn.onclick = function() {
+//   modal.style.display = "block";
+//   modalContent.src = this.src; // 모달 이미지 요소의 src를 변경
+//   document.body.style.overflow = "hidden"; // 스크롤 비활성화
+
+
+// }
+// closeb.onclick = function() {
+//   modal.style.display = "none";
+//   document.body.style.overflow = "auto"; // 스크롤 비활성화
+
+// }
+
+// closeBtn.onclick = function() {
+//   modal.style.display = "none";
+//   enableBackgroundScroll(); // 배경 스크롤 활성화
+// }
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    enableBackgroundScroll(); // 배경 스크롤 활성화
+
+
+  }
+}
+    function Home() {
+      window.location.href = "{% url 'mainpage:mainpage' %}";
+    }
+    function goBack() {
+    window.history.back();
+    }
+    function detail() {
+      window.location.href = "{% url 'order:home' %}";
+    }
+
+  
+    </script>
+  </body>
+</html>

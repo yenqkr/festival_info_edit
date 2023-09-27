@@ -1,0 +1,448 @@
+@font-face {
+    font-family: "Pretendard-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+        format("woff");
+    font-style: normal;
+    }
+
+* {
+    font-family: "Pretendard-Regular";
+    box-sizing: border-box;
+    list-style: none;
+}
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body{
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    /* background: url(images/mainpage_re.png) no-repeat center; */
+    background-size: cover;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-family: "Pretendard-Regular";
+}
+
+main {
+    /* padding: 160px 0 100px 0;
+    min-height: 100%;  */
+    margin: 0;
+    width: 100%;
+    margin-top: 50px;
+    background: url('../img/mainpageBack.svg' ) no-repeat center;
+    background-size: cover;
+    }
+
+.img-wrap{
+    position: relative;
+    background: url('../img/backCircle.svg') no-repeat center center;
+    width: 100%; /* 너비를 100%로 설정하여 부모 요소의 너비에 맞춥니다. */
+    padding-top: 150%;
+    background-size: cover;
+}
+
+.crystal{
+    max-width: 55%; 
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.subgraphic1{
+    max-width: 12%; 
+    height:auto;
+    position: absolute;
+    bottom: 30%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+}
+.subgraphic2{
+    max-width: 10%; 
+    height:auto;
+    position: absolute;
+    top: 33%;
+    right: 10%;
+    transform: translate(-50%, -50%);
+}
+
+.background{
+    display:block; 
+    margin:auto; 
+    width: auto; 
+    height: auto;
+    max-width: 150%; 
+    object-fit: none; /* 이미지 크기 조정하지 않음 */
+    object-position: center; /* 이미지를 가운데로 정렬 */
+
+}
+
+.PRISM{
+    display:block; 
+    margin: auto;
+    max-width: 70%; 
+    height: auto;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sujung2023{
+    display:block; 
+    margin:auto; 
+    max-width: 40%;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%); 
+}
+
+.glitter_big{
+    max-width: 13%; 
+    height:auto;
+    position: absolute;
+    bottom: 37%;
+    left: 12%;
+    transform: translate(-50%, -50%);
+}
+.glitter_medium{
+    max-width: 100%; 
+    height:auto;
+    position: absolute;
+    bottom: 24%;
+    right: 3%;
+    transform: translate(-50%, -50%);
+} 
+.glitter_small{
+    max-width: 100%; 
+    height:auto;
+    position: absolute;
+    top: 23%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+} 
+
+
+.infotype{
+    display:block; 
+    margin:50px auto;
+    max-width: 80%; 
+    height: auto
+
+}
+.datetype {
+    display: block;
+    margin: 40px auto 70px auto;
+    max-width: 30%; /* 이미지의 최대 너비를 화면 너비에 맞게 조절 */
+    height: auto; /* 이미지의 가로 세로 비율을 유지하도록 설정 */
+}
+
+
+#rectangle1 {
+    width: 45%;
+    height: 121px;
+    border:none;
+    border-radius: 7px;
+    background: white;
+    float: left;
+    margin-bottom:78px;
+    margin-left:4%;
+}
+#rectangle2 {
+    width: 45%;
+    height: 121px;
+    border:none;
+    border-radius: 7px;
+    background: white;
+    float: right;
+    margin-bottom:78px;
+    margin-right:4%;
+}
+#rectangle1-up, #rectangle2-up{
+    width: 100%;
+    height: 83px;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#rectangle1-bottom, #rectangle2-bottom{
+    width: 100%;
+    height: 38px;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    background: #F06786;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Pretendard-Regular";
+    font-size: 13px;
+    color: white;
+}
+.timeimg{
+    width: 111.2px;
+    height: 62.8px;
+}
+.boothimg{
+    width: 115.3px;
+    height: 59.9px;
+}
+
+.btn-area {
+    margin-left: 25%;
+    margin-right: 25%;
+    /* flex-direction: column; */
+    justify-content: center; /* 가로 중앙 정렬 추가 */
+    text-align: center; /* 버튼 내용 가운데 정렬 추가 */
+
+}
+
+.btn-area button {
+    margin-bottom: 20px;
+    width: 183px;
+    height: 41px;
+    background-color: #6C5C9C;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: "Pretendard-Regular";
+    
+}
+
+
+#rectangle3 {
+    padding: 0 10%; /* 좌우 padding 적용 */
+    background: #262626;
+    bottom: 0;
+    width: 100%;
+    height: 140px; /* 원하는 높이로 조절 */
+    font-family: "Pretendard-Regular";
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 아래쪽 정렬 */
+    box-sizing: border-box;
+    position: relative; 
+    margin-top: 17% ; 
+}
+
+.detail{
+    color:#B7B7B7;
+    font-size: 10px;
+    font-weight: bolder;
+    position: absolute;
+    top: 50%;
+    margin-top: -5px; 
+}
+
+
+.detail2{
+    color:#B7B7B7;
+    font-size: 8px;
+    text-align: left;
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+}
+.detail3{
+    color:#B7B7B7;
+    font-size: 8px;
+    position: absolute;
+    white-space: nowrap; /* 줄바꿈 방지 */
+    bottom: 13%; /* 세로기준 1/4 지점 */
+    left: 50%; /* 가로기준 가운데 */
+    transform: translateX(-50%);
+}
+
+.nav {
+    margin-top: 5px;
+    display: flex;
+    width:100%;
+    height: 30%;
+    justify-content: space-between; /* 요소들 사이의 간격을 최대로 설정 */
+    align-items: flex-start; /* 위 정렬 */
+    position: relative; 
+}
+.mark{
+    color:#B7B7B7;
+    font-size: 8px;
+    text-align:center;
+    position: absolute; /* 추가된 부분 */
+    top: 30%; /* 상단으로 이동 */
+    right: 0px;
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+}
+#x{
+    margin:4px;
+}
+.mutsaLogo{
+    width: 20px; 
+}
+.yeojeongLogo{
+    height:20px;
+}
+
+
+/* 화면 너비가 500px 이상일 때 버튼 크기 더 늘리기 */
+@media (min-width: 500px) {
+    
+    #rectangle1 {
+        width: 45%;
+        float: left;
+        margin-bottom:25%;
+        margin-left:4%;
+    }
+    #rectangle2 {
+        width: 45%;
+        float: right;
+        margin-bottom:25%;
+        margin-right:4%;
+    }
+    #rectangle1-up, #rectangle2-up{
+        width: 100%;
+        height: auto;
+        /* height: 83px; */
+        padding-top: 10%; 
+        padding-bottom: 10%; 
+    }
+    #rectangle1-bottom, #rectangle2-bottom{
+        width: 100%;
+        height: 38px;
+        padding-top: 3%; 
+        padding-bottom: 3%; 
+        font-size: 20px;
+    }
+
+    .timeimg{
+        width: 60%;
+        height: auto;
+    }
+    .boothimg{
+        width: 65%;
+        height: auto;
+    }
+    
+    .btn-area button{
+        width: 100%;
+        height: 50px;
+        margin-bottom: 10%;
+        padding-top: 10%; 
+        padding-bottom: 10%; 
+        font-size: 20px;
+        display: flex; /* Flexbox 레이아웃 사용 */
+        justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center; /* 수직 중앙 정렬 */
+    }
+
+    .detail{
+        font-size: 15px;
+    }
+    .detail2, .detail3{
+        font-size: 12px;
+    }
+}
+
+/* main_nav */
+
+a{
+    color:#FCF9FB ;
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    background-color: #F06786;
+    position: fixed;
+    top:0;
+    height: 75px;
+    padding: 16px 20px;
+    z-index: 3;
+    align-items: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo{
+    height: 21px;
+    width: 89px;
+}
+
+
+.header ul{
+    margin-top: 74px;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: #F06786;
+} 
+
+.menu > li{
+    padding: 17px 36px;
+}
+
+.header ul a{
+    text-decoration: none;
+    font-size: 15px;
+}
+.header .menu{
+    clear:both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+
+.header .menu-icon{
+    display: flex;
+    cursor: pointer;
+}
+
+.menu{
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.header .menu-btn{
+    display: none;
+}
+
+.header .menu-btn:checked ~ .menu{
+    max-height: 500px;
+}
+
+.box{
+    text-align: center;
+    font-size: 12px;
+    margin: 23px 0px 50px 35px;
+    width: 80px;
+    height: 24px;
+    background-color: #ffffff00;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    border:1px solid white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container#blur.active{
+    filter: blur(5px) brightness(0.75);
+}

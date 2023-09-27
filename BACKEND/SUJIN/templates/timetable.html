@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timetable</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <link rel="stylesheet" href="{% static 'css/timetable.css' %}" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+</head>
+<body>
+    <!-- 헤더는 나중에 js로 연결하기 -->
+    <header class="header">
+        <a><img class="back" src="{% static 'img/backicon.svg' %}" alt="뒤로가기" class="list_icon"></a>
+        <img class="prism" src="{% static 'img/prismPink.svg' %}" alt="로고" class="list_icon2" id="logo">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class='menu-icon' for="menu-btn">
+        <div class='menu-button' onclick="toggle()">
+            <img src="{% static 'img/hamburger.svg' %}" alt="로고" class="Group 1_pink">
+        </div>
+        </label>
+        <ul class="menu">
+            <li><a href="#">타임테이블</a></li>
+            <li><a href="#">축제 지도 확인하기</a></li>
+            <li><a href="#">플리마켓 / 제휴부스 / 총학부스</a></li>
+            <li><a href="#">굿즈 구매 예약</a></li>
+            <li><a href="#">공지사항</a></li>
+            <li><a href="#">방명록</a></li>
+            <li><a href="#">만든이들</a></li>
+            <a href="#"><div class="box">관리자 모드</div></a>
+        </ul>
+    </header>
+    <div class="container_main" id="blur">
+    <div id="wrap">
+        <div id="title">
+            <div class="title_photo">
+                <img src="{% static 'img/staricon.svg' %}"></img>
+            </div>
+            <div class="title_tx">타임테이블</div>
+        </div>
+        <div class="container">
+            <div class="buttons">
+                <div class="date_btn clicked" id="fourth">10월 4일</div>
+                <div class="date_btn non-clicked" id="fifth">10월 5일</div>
+            </div>
+            <div class="time_table">
+                <table class="time_table">
+                    <tbody>
+                        <tr>
+                            <td class="time">11:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">12:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">13:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">14:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">15:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">16:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">17:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">18:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">19:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">20:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">21:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                        <tr>
+                            <td class="time">22:00</td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                            <td class="empty"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="schedule long" id="day1">
+                    <span>푸드트럭<br><br><br>수정네컷<br><br><br>포토존<br><br><br>총학생회<br>부스</span>
+                </div>
+                <div class="schedule long" id="day2">
+                    <span>학생부스<br><br><br>체험형<br>부스</span>
+                </div>
+                <div class="schedule long" id="day3">
+                    <span>제휴부스</span>
+                </div>
+                <div class="schedule short" id="day4-1">
+                    <span>미니 이벤트</span>
+                </div>
+                <div class="schedule show short" id="day4-2-2">
+                    <span>운정<br>가요제</span>
+                </div>
+                <div class="schedule show short" id="day4-2-1">
+                    <span>학생공연</span>
+                </div>
+                <div class="schedule short" id="day4-3">
+                    <span>연예인 공연</span>
+                </div>
+                <div class="schedule short" id="day4-4">
+                    <span>애프터 파티</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    // 블러처리
+    function toggle(){
+        var blur=document.getElementById('blur');
+        blur.classList.toggle('active')
+        }
+
+    const allButtons = document.querySelectorAll(".date_btn");
+
+    function handleClick(event) {
+        // 버튼 색 변경
+        allButtons.forEach((btn) => {
+            btn.classList.remove("clicked");
+            btn.classList.add("non-clicked");
+        });
+
+        event.target.classList.add("clicked");
+
+        // 텍스트 변경
+        const dateId = event.target.id;
+        const show_1st = document.getElementById("day4-2-1");
+        const show_2nd = document.getElementById("day4-2-2");
+        if (dateId === "fourth") {
+            show_1st.style.opacity = 1;
+            show_2nd.style.opacity = 0;
+        }
+        else if (dateId === "fifth") {
+            show_1st.style.opacity = 0;
+            show_2nd.style.opacity = 1;
+        }
+
+    }
+
+    allButtons.forEach((e) => {
+        e.addEventListener("click", handleClick);
+    });
+
+</script>

@@ -1,0 +1,361 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+html {
+  margin: 0;
+  /* height: 100%; */
+}
+body {
+  /* height: 100%; */
+  margin: 0;
+  padding: 0;
+  background-color: #fcf9fb;
+
+  font-family: "Pretendard-Regular";
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+button {
+  font-family: "Pretendard-Regular";
+}
+.select_item ul {
+  padding-left: 15px;
+}
+.select_item li {
+  list-style-type: disc;
+}
+input {
+  width: 100%;
+  height: 47px;
+  font-family: "Pretendard-Regular";
+  font-size: 12px;
+}
+input:focus {
+  outline: none;
+}
+hr {
+  border: 0px;
+  border-top: 1.5px dashed #bbb;
+  /* margin-top: 24px; */
+}
+select {
+  color: #f06786;
+  border-radius: 7px;
+  border: solid 1px #f06786;
+  width: 180px;
+  height: 40px;
+  font-family: "Pretendard-Regular";
+  font-size: 11px;
+  padding-left: 18px;
+  appearance: none;
+  background: #fff url("../img/dropdown1.svg") no-repeat center right; /*화살표 이미지 넣기*/
+  background-size: 52px 40px;
+  margin-top: 10px;
+}
+select:focus {
+  outline: none;
+}
+option:focus {
+  outline: none;
+}
+
+/* .booking {
+  height: 70px;
+} */
+.top {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  padding-bottom: 10px;
+}
+.sparkle {
+  width: 12px;
+  height: 20px;
+}
+.booking_text {
+  color: #f06786;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 10px;
+}
+.insert {
+  margin-top: 20px;
+  align-items: center;
+}
+.insert input {
+  border-radius: 7px;
+  border: solid 1px #f06786;
+  margin-top: 13px;
+  color: #313131;
+  padding-left: 17px; /* 왼쪽 공간 추가 */
+  box-sizing: border-box; /* 박스 모델 크기 계산 방식 변경 */
+}
+
+.text {
+  color: #313131;
+  font-size: 13px;
+}
+.select_date {
+  margin-top: 17px;
+}
+.date {
+  color: #313131;
+  font-size: 11px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.check_icon {
+  width: 17px;
+  height: 17px;
+  vertical-align: middle;
+}
+.select_item {
+  color: #313131;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  font-size: 13px;
+}
+.price {
+  float: right;
+  color: #313131;
+}
+.btn {
+  width: 100%;
+  margin-top: 39px;
+  margin-bottom: 25px;
+}
+.booking_btn {
+  background-color: #f06786;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  width: 100%;
+  height: 47px;
+  font-size: 14px;
+}
+.text_input {
+  color: #313131;
+}
+
+/* header */
+* {
+  box-sizing: border-box;
+  list-style: none;
+}
+
+a {
+  color: #f06786;
+}
+
+#logo {
+  height: 21px;
+  width: 89px;
+}
+
+.header ul {
+  margin-top: 74px;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fcf9fb;
+}
+.menu > li {
+  padding: 17px 36px;
+}
+.header ul a {
+  text-decoration: none;
+  font-size: 15px;
+}
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+.header .menu-icon {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  background-color: #fcf9fb;
+  position: fixed;
+  height: 75px;
+  padding: 16px;
+  z-index: 3;
+  align-items: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 500px;
+}
+
+.box {
+  text-align: center;
+  font-size: 12px;
+  margin: 23px 0px 50px 35px;
+  width: 80px;
+  height: 24px;
+  background-color: #ffffff00;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 1px solid #f06786ed;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container#blur.active {
+  background-color: rgba(0, 0, 0, 0.25);
+  filter: blur(5px) brightness(0.75);
+}
+
+.container {
+  height: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 75px;
+}
+
+/* 모달창 */
+#modalOpenButton,
+#modalCloseButton {
+  cursor: pointer;
+}
+
+#modalContainer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#modalContent {
+  position: absolute;
+  background-color: #ffffff;
+  width: 350px;
+  height: auto;
+  border-radius: 7px;
+  padding: 20px;
+}
+
+#modalContainer.hidden {
+  display: none;
+}
+.booking_done {
+  color: #030303;
+  font-size: 15px;
+  font-weight: bold;
+}
+.done {
+  display: flex;
+  align-items: center; /* 높낮이 맞춤 */
+}
+.close {
+  position: absolute;
+  right: 0;
+  padding-right: 20px;
+}
+.explain {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.content {
+  font-size: 12px;
+  color: #a0a0a0;
+}
+.text2 {
+  margin-top: 5px;
+}
+.popup_item {
+  color: #313131;
+  font-size: 11px;
+}
+.popup_detail {
+  color: #313131;
+  font-size: 11px;
+  float: right;
+}
+.total_price {
+  color: #313131;
+  font-size: 13px;
+  font-weight: bold;
+}
+.total_price2 {
+  color: #313131;
+  font-size: 13px;
+  font-weight: bold;
+  float: right;
+}
+.btns {
+  display: flex;
+  padding-top: 15px;
+  justify-content: center;
+}
+.home {
+  width: 150px;
+  height: 37px;
+  border-radius: 20.5px;
+  background-color: white;
+  border: 0.5px solid #f194b4; /* border 속성을 사용하여 두께와 색상을 설정 */
+  color: #f194b4;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 10px; /* 오른쪽 마진 추가 */
+}
+
+.more {
+  width: 150px;
+  height: 37px;
+  border-radius: 20.5px;
+  background-color: #f06786;
+  color: white;
+  border: 0.5px solid #f06786;
+  font-size: 12px;
+  font-weight: 500;
+}
+.back {
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 색상과 투명도 조절 */
+  z-index: 999; /* 모달창 위에 표시되도록 z-index 설정 */
+  display: none; /* 초기에는 숨겨진 상태로 설정 */
+}

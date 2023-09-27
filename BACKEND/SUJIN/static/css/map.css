@@ -1,0 +1,186 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css");
+
+header {
+    width: 100%;
+    height: 75px;
+    background-color: #F06786;
+}
+
+body {
+    font-family: Pretendard;
+}
+
+.stamp {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.stamp > * {
+    display: inline;
+    vertical-align: middle;
+}
+
+.map{
+    width: 100%;
+    overflow: hidden;
+}
+
+.map_img{
+    width: 100%;
+}
+
+/* 지도 선택하기 */
+.select_wrap {
+    position: absolute;
+    width: calc(100% - 50px);
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0px -10px 10px #E6E6E6;
+    padding: 25px;
+    padding-bottom: 60px;
+    font-weight: bold;
+    background-color: #fff;
+}
+
+.map_select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.select_area > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.star {
+    margin-right: 10px;
+}
+
+.line {
+    border-top: 1px solid #E2E2E2;
+    margin: 25px 0;
+}
+
+.reset_wrap {
+    display: flex;
+}
+
+/* 헤더 */
+/* @font-face {
+    font-family: "Pretendard-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+        format("woff");
+    font-style: normal;
+    }
+  
+  
+  * {
+    box-sizing: border-box;
+    list-style: none;
+  }
+   */
+  /* html,body{
+    margin: 0;
+    height: 100%;
+  } */
+  
+  a{
+    color: #F06786;
+  }
+  
+  #logo{
+    height: 21px;
+    width: 89px;
+  }
+  
+  
+  .header ul{
+    margin-top: 74px;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: #FCF9FB;
+  } 
+  .menu > li{
+    padding: 17px 36px;
+  }
+  .header ul a{
+  
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .header .menu{
+    clear:both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+  }
+  
+  .header .menu-icon{
+    display: flex;
+  
+  }
+  
+  
+  .header{
+    display: flex;
+    width: 100%;
+    background-color: #FCF9FB;
+    position: fixed;
+    top:0;
+    height: 75px;
+    padding: 16px;
+    z-index: 3;
+    align-items: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    list-style: none;
+  }
+  .menu{
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+    
+  }
+  .header .menu-btn{
+    display: none;
+  }
+  
+  .header .menu-btn:checked ~ .menu{
+    max-height: 500px;
+  }
+  
+  
+  .box{
+    text-align: center;
+    font-size: 12px;
+    margin: 23px 0px 50px 35px;
+    width: 80px;
+    height: 24px;
+    background-color: #ffffff00;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    border:1px solid #F06786ed;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container_main#blur.active{
+    background-color: rgba(0, 0, 0, 0.25);
+  filter: blur(5px) brightness(0.75)
+  }
+  
+  .container_main{
+    height: 100vh;
+    padding-top: 75px;
+  }

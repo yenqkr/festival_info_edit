@@ -1,0 +1,105 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수정대동제</title>
+    <link rel="stylesheet" href="/static/css/mainpage.css">
+</head>
+
+<body>
+    <header class="header">
+        <img class="header_prism" src="/static/img/prismWhite.svg" alt="로고" id="logo">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class='menu-icon' for="menu-btn" onclick="toggle()">
+            <div class='menu-button'><img src="/static/img/Group 1_white.png" alt="로고" class="hamberger"></div>
+        </label>
+        <ul class="menu">
+            <li><a href="http://sswu-prism.com/main/timetable/">타임테이블</a></li>
+            <li><a href="http://sswu-prism.com/main/map/">축제 지도 확인하기</a></li>
+            <li><a href="http://sswu-prism.com/booth/">플리마켓 / 제휴부스 / 총학부스</a></li>
+            <li><a href="http://sswu-prism.com/order/goods_list/">굿즈 구매 예약</a></li>
+            <li><a href="{% url 'mainpage:info' %}">공지사항</a></li>
+            <li><a href="http://sswu-prism.com/visitor/">방명록</a></li>
+            <li><a href="{% url 'mainpage:makers' %}">만든이들</a></li>
+            <a href="{% url 'mainpage:administrator' %}">
+                <div class="box">관리자 모드</div>
+            </a>
+        </ul>
+    </header>
+    <div class="container" id="blur">
+        <main>
+            <div class="img-wrap">
+                <!-- <img class="backCircle" src="images/backCircle.svg" alt="backCircle"> -->
+                <img class="crystal" src="/static/img/maingraphic.png" alt="crystal">
+                <img class="subgraphic1" src="/static/img/subgraphic1.png" alt="subgraphic1">
+                <img class="subgraphic2" src="/static/img/subgraphic2.png" alt="subgraphic2">
+                <img class="glitter_big" src="/static/img/glitter_big.png">
+                <img class="glitter_medium" src="/static/img/glitter_medium.png">
+                <img class="glitter_small" src="/static/img/glitter_small.png">
+                <img class="PRISM" src="/static/img/logotype.png" alt="PRISM">
+                <img class="sujung2023" src="/static/img/2023sujung.svg" alt="2023 수정대동제">
+            </div>
+
+            <img class="infotype" src="/static/img/infotype.svg" alt="infotype">
+            <img class="datetype" src="/static/img/datetype.svg" alt="datetype">
+
+            <div class="check">
+                <a href="http://sswu-prism.com/timetable/">
+                    <div id="rectangle1" class="responsive-box">
+                        <div id="rectangle1-up">
+                            <img class="timeimg" src="/static/img/timetableGraphic.svg" alt="timeimg">
+                        </div>
+                        <div id="rectangle1-bottom">
+                            타임테이블 확인하기
+                        </div>
+                    </div>
+                </a>
+
+                <a href="http://sswu-prism.com/booth/">
+                    <div id="rectangle2" class="responsive-box">
+                        <div id="rectangle2-up">
+                            <img class="boothimg" src="/static/img/boothGraphic.svg" alt="boothimg">
+                        </div>
+                        <div id="rectangle2-bottom">
+                            부스 확인하기
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="btn-area">
+                <button class="btn" type="submit" onclick="https://www.instagram.com/sungshin_festival/?igshid=MWZjMTM2ODFkZg%3D%3D">수정대동제 공식 인스타그램</button>
+            </div>
+
+
+            <div id="rectangle3">
+                <div class="nav">
+                    <div class="detail">2023 수정대동제 'PRISM' 웹페이지</div>
+                    <div class="mark">
+                        <img class="mutsaLogo" src="/static/img/mutsaLogo.png" alt="mutsaLogo">
+                        <p id="x">x</p>
+                        <img class="yeojeongLogo" src="/static/img/yeojeongLogo.png" alt="yeojeongLogo">
+                    </div>
+                </div>
+                <div class="detail2">
+                    PM & Design 송지연
+                    </br>Front-End 김소정 문수호 박예인 이소민 이채현
+                    </br>Back-End 이예령 김현수 이가인 전수진
+                </div>
+                <div class="detail3">Copyright 2023. LIKELION at SUNGSHIN All rights reserved.</div>
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript">
+
+        function toggle() {
+            var blur = document.getElementById('blur');
+            blur.classList.toggle('active')
+        }
+    </script>
+</body>
+
+</html>

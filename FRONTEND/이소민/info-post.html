@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="info-post.css">
+        <link
+            rel="stylesheet"
+            as="style"
+            crossorigin="crossorigin"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/>
+        <title>info-post</title>
+    </head>
+    <body>
+        <div class="container">
+            <!-- 상단바 -->
+            <header class="header">
+                <a><img class="back" src="img/backicon.svg" alt="뒤로가기" class="list_icon"></a>
+                <img class="prism" src="img/prismPink.svg" alt="로고" class="list_icon2" id="logo">
+                <input class="menu-btn" type="checkbox" id="menu-btn" />
+                <label class='menu-icon' for="menu-btn">
+                <div class='menu-button' onclick="toggle()">
+                    <img src="img/hamburger.svg" alt="로고" class="Group 1_pink">
+                </div>
+                </label>
+                <ul class="menu">
+                    <li><a href="#">타임테이블</a></li>
+                    <li><a href="#">축제 지도 확인하기</a></li>
+                    <li><a href="#">플리마켓 / 제휴부스 / 총학부스</a></li>
+                    <li><a href="#">굿즈 구매 예약</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">방명록</a></li>
+                    <li><a href="#">만든이들</a></li>
+                    <a href="#"><div class="box">관리자 모드</div></a>
+                </ul>
+            </header>
+            <div class="container_main" id="blur">
+                <div class="container_box">
+            <!-- 전체 흰색 박스 -->
+            <div class="white_box">
+
+                <!-- 제목,날짜 -->
+                <div class="title">
+                    <h1>수정대동제 일정 안내</h1>
+                    <h2>2023-09-01</h2>
+                </div>
+
+                <!-- 회색선 -->
+                <div class="line"></div>
+
+                <!-- 내용 -->
+                <div class="content">
+                    <h3>내용내용내용 내용 내용 내용 내용 내용 내용내용내용 내용 내용 내용 내용 내용 내용내용내용 내용 내용 내용 내용 내용 내용내용내용 내용
+                        내용 내용 내용 내용 내용내용내용 내용 내용 내용 내용 내용 내용내용내용 내용 내용 내용 내용 내용 내용내용내용 내용 내용 내용 내용 내용
+                        내용내용내용 내용 내용 내용 내용 내용
+
+                    </h3>
+                </div>
+
+                <!-- 사진 -->
+                <div class="slider">
+                    <div class="slider-inner">
+                        <div class="slider-item">
+                            <img src="img/img1.png" alt="이미지">
+                        </div>
+                        <div class="slider-item">
+                            <img src="img/img2.png" alt="이미지">
+                        </div>
+                        <div class="slider-item">
+                            <img src="img/img3.png" alt="이미지">
+                        </div>
+                        <div class="slider-item">
+                            <img src="img/img4.png" alt="이미지">
+                        </div>
+                        <!-- <div class="slider-item"> <img src="img/img1.png" alt="이미지"> </div> <div
+                        class="slider-item"> <img src="img/img2.png" alt="이미지"> </div> -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+
+        <script>
+            //블러처러
+            function toggle(){
+            var blur=document.getElementById('blur');
+            blur.classList.toggle('active')
+            }
+            let slider = document.querySelector(".slider");
+            let innerSlider = document.querySelector(".slider-inner");
+            let pressed = false;
+            let startx;
+            let x;
+
+            slider.addEventListener("mousedown", e => {
+                pressed = true;
+                startx = e.clientX - innerSlider.offsetLeft; // 변경: offsetX 대신 clientX 사용
+                slider.style.cursor = "grabbing";
+            });
+
+            slider.addEventListener("mouseenter", () => {
+                slider.style.cursor = "grab";
+            });
+
+            slider.addEventListener("mouseup", () => {
+                slider.style.cursor = "grab";
+            });
+
+            window.addEventListener("mouseup", () => {
+                pressed = false;
+            });
+
+            slider.addEventListener("mousemove", e => {
+                if (!pressed) 
+                    return;
+                e.preventDefault();
+                x = e.clientX; // 변경: offsetX 대신 clientX 사용
+
+                // 변경: 슬라이더의 크기에 맞게 이동 제한
+                innerSlider.style.left = `${Math.min(
+                    0,
+                    Math.max(-(innerSlider.offsetWidth - slider.offsetWidth), x - startx)
+                )}px`;
+            });
+
+            function checkboundary() {
+                // 변경: checkboundary 함수 제거
+            }
+        </script>
+    </body>
+</html>
